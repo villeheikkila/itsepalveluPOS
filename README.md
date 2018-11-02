@@ -1,9 +1,6 @@
 # Ohjelmistotekniikka
 
-*on hauskaa?*
+## Viikko 1
 
-* Kyllä
-* Ei
-    * __Väärin!__
-
-niinpä!
+* [gitlog.txt](https://github.com/villeheikkila/ot-harjoitustyo/blob/master/laskarit/viikko1/komentorivi.txt)
+* [komentorivi.txt](https://github.com/villeheikkila/ot-harjoitustyo/blob/master/laskarit/viikko1/gitlog.txt)
