@@ -1,0 +1,28 @@
+.
+├── Desktop -> /home/ad/home/h/hcville/Desktop
+├── Documents -> /home/ad/home/h/hcville/Documents
+├── Downloads -> /home/ad/home/h/hcville/Downloads
+├── kurssit
+│   └── ot2018
+│       └── viikko1
+│           └── Unicafe
+│               ├── pom.xml
+│               └── src
+│                   ├── main
+│                   │   ├── java
+│                   │   │   └── com
+│                   │   │       └── mycompany
+│                   │   │           └── unicafe
+│                   │   │               ├── Kassapaate.java
+│                   │   │               ├── Maksukortti.java
+│                   │   │               └── Paaohjelma.java
+│                   │   └── resources
+│                   └── test
+│                       └── java
+│                           └── com
+│                               └── mycompany
+│                                   └── unicafe
+│                                       └── MaksukorttiTest.java
+└── temp
+    └── Unicafe.zip
+
