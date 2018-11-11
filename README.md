@@ -1,6 +1,7 @@
-# Ohjelmistotekniikka
+# itsepalveluPOS
 
-## Viikko 1
+Sovelluksen avulla käyttäjien on mahdollista ostaa tuotteita ennalta määritellystä listasta. 
 
-* [komentorivi.txt](https://github.com/villeheikkila/ot-harjoitustyo/blob/master/laskarit/viikko1/komentorivi.txt)
-* [gitlog.txt](https://github.com/villeheikkila/ot-harjoitustyo/blob/master/laskarit/viikko1/gitlog.txt)
+## Dokumentaatio
+
+[Vaatimusmäärittely](dokumentaatio/vaatimusmaarittely.md)
