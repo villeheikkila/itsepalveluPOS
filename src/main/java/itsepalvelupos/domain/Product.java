@@ -15,13 +15,6 @@ public class Product {
         this.price = price;
     }
 
-    public boolean reduceInventory(int amount) {
-        if (this.inventory >= amount) {
-            this.inventory -= amount;
-            return true;
-        } return false;
-    }
-
     public int getId() {
         return id;
     }
@@ -52,15 +45,6 @@ public class Product {
 
     public void setInventory(int inventory) {
         this.inventory = inventory;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Product product = (Product) o;
-        return id == product.id &&
-                Objects.equals(name, product.name);
     }
 
 }
