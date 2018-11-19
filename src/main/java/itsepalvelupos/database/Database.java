@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Database {
+
     private String databaseName;
 
     public Database(String databaseName) throws ClassNotFoundException {

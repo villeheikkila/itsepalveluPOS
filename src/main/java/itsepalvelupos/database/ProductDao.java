@@ -57,7 +57,6 @@ public class ProductDao implements Dao<Product, Integer> {
             Integer inventory = resultSet.getInt("inventory");
             Integer price = resultSet.getInt("price");
 
-
             products.add(new Product(id, name, inventory, price));
         }
 
@@ -71,9 +70,23 @@ public class ProductDao implements Dao<Product, Integer> {
     @Override
     public void delete(Integer key) throws SQLException {
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("DROP * FROM Products WHERE id = ?");
-        stmt.setObject(1, key);
+        PreparedStatement stmt = connection.prepareStatement("DELETE FROM Products WHERE id = (?)");
+        stmt.setInt(1, key);
 
+        stmt.executeUpdate();
+        stmt.close();
+        connection.close();
+    }
+
+    public void add(Product product) throws SQLException {
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("INSERT INTO Products (name, inventory, price) VALUES (?, ?, ?)");
+        stmt.setString(1, product.getName());
+        System.out.println(product.getName());
+        stmt.setInt(2, product.getInventory());
+        stmt.setInt(3, product.getPrice());
+
+        stmt.executeUpdate();
         stmt.close();
         connection.close();
     }

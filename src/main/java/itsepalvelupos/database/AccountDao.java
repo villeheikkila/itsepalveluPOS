@@ -65,10 +65,15 @@ public class AccountDao implements Dao<Account, Integer> {
     @Override
     public void delete(Integer key) throws SQLException {
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("DROP * FROM Accounts WHERE id = ?");
+        PreparedStatement stmt = connection.prepareStatement("DELETE FROM Accounts WHERE id = (?)");
         stmt.setObject(1, key);
 
+        stmt.executeUpdate();
         stmt.close();
         connection.close();
+    }
+
+    public void add(Integer key) throws SQLException {
+        System.out.println("Not implemented yet");
     }
 }
