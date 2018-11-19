@@ -6,15 +6,17 @@ public class Product {
     private int id;
     private String name;
     private int inventory;
+    private int price;
 
-    public Product(int id, String name, int inventory) {
+    public Product(int id, String name, int inventory, int price) {
         this.id = id;
         this.name = name;
         this.inventory = inventory;
+        this.price = price;
     }
 
     public boolean reduceInventory(int amount) {
-        if (this.inventory > amount) {
+        if (this.inventory >= amount) {
             this.inventory -= amount;
             return true;
         } return false;
@@ -22,6 +24,18 @@ public class Product {
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     public String getName() {

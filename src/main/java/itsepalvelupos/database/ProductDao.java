@@ -32,8 +32,10 @@ public class ProductDao implements Dao<Product, Integer> {
         Integer id = resultSet.getInt("id");
         String name = resultSet.getString("name");
         Integer inventory = resultSet.getInt("inventory");
+        Integer price = resultSet.getInt("price");
 
-        Product product = new Product(id, name, inventory);
+
+        Product product = new Product(id, name, inventory, price);
 
         resultSet.close();
         stmt.close();
@@ -53,8 +55,10 @@ public class ProductDao implements Dao<Product, Integer> {
             Integer id = resultSet.getInt("id");
             String name = resultSet.getString("name");
             Integer inventory = resultSet.getInt("inventory");
+            Integer price = resultSet.getInt("price");
 
-            products.add(new Product(id, name, inventory));
+
+            products.add(new Product(id, name, inventory, price));
         }
 
         resultSet.close();

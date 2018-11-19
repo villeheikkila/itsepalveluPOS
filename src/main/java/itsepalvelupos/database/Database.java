@@ -39,7 +39,7 @@ public class Database {
     private List<String> Statements() {
         ArrayList<String> db = new ArrayList<>();
 
-        db.add("CREATE TABLE Products (id integer PRIMARY KEY, name varchar(100), inventory INT);");
+        db.add("CREATE TABLE Products (id integer PRIMARY KEY, name varchar(100), inventory INT, price INT);");
         db.add("CREATE TABLE Accounts (id integer PRIMARY KEY, username varchar(100), password varchar(20), admin boolean);");
 
         return db;
