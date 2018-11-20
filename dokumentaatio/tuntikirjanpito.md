@@ -2,5 +2,6 @@
 
 | päivä | aika | mitä tein  |
 | :----:|:-----| :-----|
-| 11.11. | 2    | keksin idean projektille, tein vaatimusmäärittelyn |
-| yht   | 2   | | 
+| 11.11. | 1    | keksin idean projektille, tein vaatimusmäärittelyn |
+| 11.11. | 5    | keksin idean projektille, tein vaatimusmäärittelyn |
+| yht   | 7   | | 
