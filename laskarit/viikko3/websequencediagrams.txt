@@ -1,0 +1,13 @@
+title Machine and Engine
+Main->Machine: Machine()
+Machine->tank: new FuelTank
+Machine->tank: Fill(40)
+tank->Machine: tank
+Machine->engine: new Engine(tank)
+Main->Machine: drive()
+Machine->engine: start()
+engine->tank: consume(5)
+Machine->+engine: isRunning()
+engine-->-Machine: true;
+Machine->engine: useEnergy()
+engine->tank: consume(10)
