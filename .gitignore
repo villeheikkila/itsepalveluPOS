@@ -120,5 +120,12 @@ hs_err_pid*
 # Lets add the entire IntelliJ folder...
 /.idea
 
+# VS Code as well
+.settings
 
+# Lets get rid of target
+/target
 
+# We don't need these...
+.classpath
+.project
