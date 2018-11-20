@@ -13,10 +13,11 @@ public class Main {
 
         Database database = new Database("pos.db");
         Store store = new Store(1000);
-        database.databaseInit();
+        database.initDatabase();
 
         store.addProduct(database, "Pepsi", 5, 150);
         store.listProducts(database);
+//        database.removeDatabase();
 
     }
 }

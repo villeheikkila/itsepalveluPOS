@@ -17,7 +17,7 @@ public class Database {
         return DriverManager.getConnection("jdbc:sqlite:" + databaseName);
     }
 
-    public void databaseInit() {
+    public void initDatabase() {
         File file = new File(databaseName);
         if (file.exists()) {
             System.out.println("Error: Database already exists");
@@ -34,6 +34,15 @@ public class Database {
             } catch (Throwable t) {
                 System.out.println("Error: " + t.getMessage());
             }
+        }
+    }
+
+    public void removeDatabase() {
+        File file = new File(databaseName);
+        if (!file.exists()) {
+            System.out.println("Error: Database doesn't exist");
+        } else {
+            file.delete();
         }
     }
 

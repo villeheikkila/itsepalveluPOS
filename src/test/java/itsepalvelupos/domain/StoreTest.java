@@ -18,9 +18,8 @@ class StoreTest {
 
     @Test
     void addProductActuallyAddsProduct()  throws Exception{
-        File file = new File("test.db");
         Database database = new Database("test.db");
-        database.databaseInit();
+        database.initDatabase();
         Store store = new Store(1000);
         store.addProduct(database, "Pepsi", 5, 150);
         ProductDao product = new ProductDao(database);
@@ -28,7 +27,7 @@ class StoreTest {
         assertEquals(test.getName(), "Pepsi");
         assertEquals(test.getInventory(), 150);
         assertEquals(test.getPrice(), 5);
-        file.delete();
+        database.removeDatabase();
     }
 
     @Test
