@@ -34,7 +34,6 @@ public class ProductDao implements Dao<Product, Integer> {
         Integer inventory = resultSet.getInt("inventory");
         Integer price = resultSet.getInt("price");
 
-
         Product product = new Product(id, name, inventory, price);
 
         resultSet.close();
@@ -82,7 +81,6 @@ public class ProductDao implements Dao<Product, Integer> {
         Connection connection = database.getConnection();
         PreparedStatement stmt = connection.prepareStatement("INSERT INTO Products (name, inventory, price) VALUES (?, ?, ?)");
         stmt.setString(1, product.getName());
-        System.out.println(product.getName());
         stmt.setInt(2, product.getInventory());
         stmt.setInt(3, product.getPrice());
 

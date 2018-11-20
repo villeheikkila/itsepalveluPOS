@@ -10,6 +10,7 @@ import itsepalvelupos.domain.Account;
 
 
 public class AccountDao implements Dao<Account, Integer> {
+
     private Database database;
 
     public AccountDao(Database database) {
