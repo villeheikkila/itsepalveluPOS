@@ -7,6 +7,7 @@ import itsepalvelupos.domain.Store;
 
 
 
+/*
 public class Main {
 
     public static void main(String[] args) throws Exception {
@@ -20,4 +21,4 @@ public class Main {
 //        database.removeDatabase();
 
     }
-}
+}*/
