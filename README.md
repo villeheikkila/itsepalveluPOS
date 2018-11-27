@@ -33,3 +33,13 @@ mvn package
 ```
 
 generoi hakemistoon _target_ suoritettavan jar-tiedoston _itsepalveluPOS-1.0-SNAPSHOT_
+
+### Checkstyle
+
+Tiedostoon [checkstyle.xml](checkstyle.xml) määritellyt tarkistukset suoritetaan komennolla
+
+```
+ mvn jxr:jxr checkstyle:checkstyle
+```
+
+Mahdolliset virheilmoitukset selviävät avaamalla selaimella tiedosto _target/site/checkstyle.html_
