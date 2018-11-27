@@ -4,6 +4,12 @@ package itsepalvelupos.ui;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+
+import itsepalvelupos.database.AccountDao;
+import itsepalvelupos.database.Database;
+import itsepalvelupos.domain.Account;
+import itsepalvelupos.domain.Store;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -21,11 +27,29 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+import java.sql.SQLException;
 
-public class PosUI extends Application  {
+
+public class PosUI extends Application {
+
+    private Database database;
 
     @Override
-    public void start(Stage primaryStage) {
+    public void init() throws Exception {
+        database = new Database("pos.db");
+        database.initDatabase();
+        Store store = new Store(1000);
+        store.addProduct(database, "Pepsi", 5, 150);
+        store.listProducts(database);
+    }
+
+    @Override
+    public void stop() {
+        database.removeDatabase();
+    }
+
+    @Override
+    public void start(Stage primaryStage)  {
 
         primaryStage.setTitle("itsepalveluPOS");
 
@@ -84,7 +108,7 @@ public class PosUI extends Application  {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         launch(PosUI.class);
     }
 }

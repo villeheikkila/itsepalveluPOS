@@ -1,7 +1,5 @@
 package itsepalvelupos.domain;
 
-import java.util.Objects;
-
 public class Product {
     private int id;
     private String name;

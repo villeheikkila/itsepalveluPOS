@@ -32,8 +32,9 @@ public class AccountDao implements Dao<Account, Integer> {
         Integer id = resultSet.getInt("id");
         String username = resultSet.getString("username");
         String password = resultSet.getString("password");
+        Boolean admin = resultSet.getBoolean("admin");
 
-        Account account = new Account(id, username, password);
+        Account account = new Account(id, username, password, admin);
 
         resultSet.close();
         stmt.close();
@@ -53,7 +54,7 @@ public class AccountDao implements Dao<Account, Integer> {
             Integer id = resultSet.getInt("id");
             String username = resultSet.getString("username");
             String password = resultSet.getString("password");
-            accounts.add(new Account(id, username, password));
+            Boolean admin = resultSet.getBoolean("admin");
         }
 
         resultSet.close();
@@ -74,7 +75,40 @@ public class AccountDao implements Dao<Account, Integer> {
         connection.close();
     }
 
-    public void add(Integer key) throws SQLException {
-        System.out.println("Not implemented yet");
+    public Account findName(String name) throws SQLException {
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Accounts WHERE username = ?");
+        stmt.setString(1, name);
+
+        ResultSet resultSet = stmt.executeQuery();
+        boolean hasOne = resultSet.next();
+        if (!hasOne) {
+            return null;
+        }
+
+        Integer id = resultSet.getInt("id");
+        String username = resultSet.getString("username");
+        String password = resultSet.getString("password");
+        Boolean admin = resultSet.getBoolean("admin");
+
+        Account account = new Account(id, username, password, admin);
+
+        resultSet.close();
+        stmt.close();
+        connection.close();
+
+        return account;
+    }
+
+    public void add(Account account) throws SQLException {
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("INSERT INTO Accounts (username, password, admin) VALUES (?, ?, ?)");
+        stmt.setString(1, account.getUsername());
+        stmt.setString(2, account.getPassword());
+        stmt.setBoolean(3, account.isAdmin());
+
+        stmt.executeUpdate();
+        stmt.close();
+        connection.close();
     }
 }

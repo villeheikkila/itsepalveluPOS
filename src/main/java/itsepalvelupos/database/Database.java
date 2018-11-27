@@ -22,7 +22,7 @@ public class Database {
         if (file.exists()) {
             System.out.println("Error: Database already exists");
         } else {
-            List<String> statements = Statements();
+            List<String> statements = statements();
             try (Connection conn = getConnection()) {
                 Statement stmt = conn.createStatement();
 
@@ -46,11 +46,13 @@ public class Database {
         }
     }
 
-    private List<String> Statements() {
+    private List<String> statements() {
         ArrayList<String> db = new ArrayList<>();
 
         db.add("CREATE TABLE Products (id integer PRIMARY KEY, name varchar(100), inventory INT, price INT);");
         db.add("CREATE TABLE Accounts (id integer PRIMARY KEY, username varchar(100), password varchar(20), admin boolean);");
+
+        db.add("INSERT INTO Accounts (username, password, admin) VALUES (hello, world, false");
 
         return db;
     }

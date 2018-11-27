@@ -20,7 +20,9 @@ public class Store {
             Product product = new Product(0000, name, inventory, price); // id must be removed at some point
             productDB.add(product);
             return true;
-        } else { return false; }
+        } else {
+            return false;
+        }
     }
 
     public void listProducts(Database database) throws SQLException {
