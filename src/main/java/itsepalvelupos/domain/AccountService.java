@@ -1,30 +1,30 @@
 package itsepalvelupos.domain;
 
 import itsepalvelupos.database.AccountDao;
-
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class AccountService {
 
     private AccountDao accountDao;
     private Account currentUser;
-    private ArrayList<Integer> shoppingCart;
 
     public AccountService(AccountDao accountDao) {
         this.accountDao = accountDao;
     }
 
-    public boolean login(String userName) throws SQLException {
+    public boolean login(String userName, String password) throws SQLException {
         Account account = accountDao.findName(userName);
 
         if (userName == null) {
             return false;
         }
 
-        currentUser = account;
+        if (account.getPassword().equals(password)) {
+            currentUser = account;
+            return true;
+        }
 
-        return true;
+        return false;
     }
 
     public boolean createUser(String userName, String password, boolean admin) throws SQLException  {
@@ -47,10 +47,6 @@ public class AccountService {
         } else {
             return false;
         }
-    }
-
-    public void checkOutCart() throws SQLException {
-
     }
 
     public void logOut() {

@@ -1,7 +1,5 @@
 package itsepalvelupos.domain;
 
-import java.util.Objects;
-
 public class Account {
     private int id;
     private String username;
@@ -28,19 +26,6 @@ public class Account {
     }
 
     public void setAdmin(boolean admin) { this.admin = admin; }
-
-    public boolean passwordEquals(String pass) {
-        if (this.password.equals(pass)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(password);
-    }
 
     public String getUsername() {
         return username;
