@@ -24,11 +24,9 @@ public class ProductService {
         }
     }
 
-    public void listProducts() throws SQLException {
+    public List<Product> listProducts() throws SQLException {
         List<Product> products = productDao.findAll();
-        for (Product product : products) {
-            System.out.println("name: " + product.getName() + " price: " + product.getPrice() + " inventory: " + product.getInventory());
-        }
+        return products;
     }
     public boolean buyProduct(int id) throws SQLException {
         if (productDao.findOne(id) != null) {

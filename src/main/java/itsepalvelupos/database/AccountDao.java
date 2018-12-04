@@ -33,8 +33,9 @@ public class AccountDao implements Dao<Account, Integer> {
         String username = resultSet.getString("username");
         String password = resultSet.getString("password");
         Boolean admin = resultSet.getBoolean("admin");
+        Integer balance = resultSet.getInt("balance");
 
-        Account account = new Account(id, username, password, admin);
+        Account account = new Account(id, username, password, admin, balance);
 
         resultSet.close();
         stmt.close();
@@ -52,10 +53,10 @@ public class AccountDao implements Dao<Account, Integer> {
         List<Account> accounts = new ArrayList<>();
         while (resultSet.next()) {
             Integer id = resultSet.getInt("id");
-            System.out.println(id);
             String username = resultSet.getString("username");
             String password = resultSet.getString("password");
             Boolean admin = resultSet.getBoolean("admin");
+            Integer balance = resultSet.getInt("balance");
         }
 
         resultSet.close();
@@ -92,8 +93,9 @@ public class AccountDao implements Dao<Account, Integer> {
         String username = resultSet.getString("username");
         String password = resultSet.getString("password");
         Boolean admin = resultSet.getBoolean("admin");
+        Integer balance = resultSet.getInt("balance");
 
-        Account account = new Account(id, username, password, admin);
+        Account account = new Account(id, username, password, admin, balance);
 
         resultSet.close();
         stmt.close();
@@ -104,10 +106,11 @@ public class AccountDao implements Dao<Account, Integer> {
 
     public void add(Account account) throws SQLException {
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("INSERT INTO Accounts (username, password, admin) VALUES (?, ?, ?)");
+        PreparedStatement stmt = connection.prepareStatement("INSERT INTO Accounts (username, password, admin, balance) VALUES (?, ?, ?, ?)");
         stmt.setString(1, account.getUsername());
         stmt.setString(2, account.getPassword());
         stmt.setBoolean(3, account.isAdmin());
+        stmt.setInt(4, account.getBalance());
 
         stmt.executeUpdate();
         stmt.close();
@@ -116,11 +119,12 @@ public class AccountDao implements Dao<Account, Integer> {
 
     public void update(Account account) throws SQLException {
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("UPDATE Accounts SET username = ?, password = ?, admin = ? WHERE ?");
+        PreparedStatement stmt = connection.prepareStatement("UPDATE Accounts SET username = ?, password = ?, admin = ?, balance = ? WHERE ?");
         stmt.setString(1, account.getUsername());
         stmt.setString(2, account.getPassword());
         stmt.setBoolean(3, account.isAdmin());
-        stmt.setInt(4, account.getId());
+        stmt.setInt(4, account.getBalance());
+        stmt.setInt(5, account.getId());
 
         stmt.executeUpdate();
         stmt.close();

@@ -8,10 +8,7 @@ import com.jfoenix.controls.JFXTextField;
 import itsepalvelupos.database.AccountDao;
 import itsepalvelupos.database.Database;
 import itsepalvelupos.database.ProductDao;
-import itsepalvelupos.domain.Account;
-import itsepalvelupos.domain.AccountService;
-import itsepalvelupos.domain.ProductService;
-import itsepalvelupos.domain.Store;
+import itsepalvelupos.domain.*;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -31,35 +28,21 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.sql.SQLException;
+import java.util.List;
 
 
 public class PosUI extends Application {
 
-    private Database database;
+    private StoreService storeService;
 
     @Override
     public void init() throws Exception {
-        database = new Database("pos.db");
-        database.initDatabase();
-        AccountDao accountdao = new AccountDao(database);
-        ProductDao productDao = new ProductDao(database);
-        ProductService productService = new ProductService(productDao);
-        AccountService accountservice = new AccountService(accountdao);
-        productService.addProduct("cokis", 10, 3);
-        accountservice.createUser("Pekka", "moi", false);
-        accountdao.findAll();
-        Account account = new Account(1, "Pekka", "hei", false);
-        accountdao.update(account);
-
-        productService.listProducts();
-        productService.buyProduct(1);
-        productService.listProducts();
-
+        storeService = new StoreService("pos.db", 1);
     }
 
     @Override
-    public void stop() {
-        database.removeDatabase();
+    public void stop() throws SQLException {
+
     }
 
     @Override
@@ -116,7 +99,6 @@ public class PosUI extends Application {
 
         Scene scene = new Scene(grid, 600, 350);
         scene.getStylesheets().add("itsepalvelupos/ui/stylesheet.css");
-
         primaryStage.setScene(scene);
         primaryStage.show();
     }

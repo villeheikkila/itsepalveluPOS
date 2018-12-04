@@ -5,12 +5,14 @@ public class Account {
     private String username;
     private String password;
     private boolean admin;
+    private int balance;
 
-    public Account(int id, String username, String password, boolean admin) {
+    public Account(int id, String username, String password, boolean admin, int balance) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.admin = admin;
+        this.balance = balance;
     }
 
     public int getId() {
@@ -43,5 +45,7 @@ public class Account {
         this.password = password;
     }
 
+    public int getBalance() { return balance; }
 
+    public void setBalance(int balance) { this.balance = balance; }
 }

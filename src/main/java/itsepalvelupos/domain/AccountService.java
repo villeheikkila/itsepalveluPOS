@@ -27,12 +27,12 @@ public class AccountService {
         return false;
     }
 
-    public boolean createUser(String userName, String password, boolean admin) throws SQLException  {
+    public boolean createUser(String userName, String password, boolean admin, int balance) throws SQLException  {
         if (accountDao.findName(userName) != null) {
             return false;
         }
 
-        Account account = new Account(0000, userName, password, admin);
+        Account account = new Account(0000, userName, password, admin, balance);
         accountDao.add(account);
 
         return true;
