@@ -27,7 +27,9 @@ public class Account {
         return admin;
     }
 
-    public void setAdmin(boolean admin) { this.admin = admin; }
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
+    }
 
     public String getUsername() {
         return username;
@@ -45,7 +47,11 @@ public class Account {
         this.password = password;
     }
 
-    public int getBalance() { return balance; }
+    public int getBalance() {
+        return balance;
+    }
 
-    public void setBalance(int balance) { this.balance = balance; }
+    public void setBalance(int balance) {
+        this.balance = balance;
+    }
 }

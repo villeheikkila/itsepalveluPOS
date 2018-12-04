@@ -18,14 +18,6 @@ class StoreTest {
 
     @Test
     void addProductActuallyAddsProduct()  throws Exception{
-        Database database = new Database("test.db");
-        database.initDatabase();
-        ProductDao product = new ProductDao(database);
-        Product test = product.findOne(1);
-        assertEquals(test.getName(), "Pepsi");
-        assertEquals(test.getInventory(), 150);
-        assertEquals(test.getPrice(), 5);
-        database.removeDatabase();
     }
 
     @Test
