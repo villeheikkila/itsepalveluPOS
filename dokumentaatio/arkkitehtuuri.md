@@ -7,3 +7,7 @@ Ohjelman rakenne noudattelee kolmitasoista kerrosarkkitehtuuria. Pakkaus _itsepa
 Alustava luokka/pakkauskaavio (tämä tulee varmasti muuttumaan):
 
 <img src="kuvat/luokka-pakkauskaavio.png" width="500">
+
+Sekvessi kaavio kirjautumisesta, UI osuutta ei ole vielä toteutettu.
+
+<img src="kuvat/sekvessikaavio.png" width="500">

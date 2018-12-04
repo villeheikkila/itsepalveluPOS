@@ -42,7 +42,6 @@ public class PosUI extends Application {
 
     @Override
     public void stop() throws SQLException {
-
     }
 
     @Override
