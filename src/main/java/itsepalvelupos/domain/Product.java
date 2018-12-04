@@ -13,6 +13,9 @@ public class Product {
         this.price = price;
     }
 
+    public Product(Integer id, String name, Integer cash) {
+    }
+
     public int getId() {
         return id;
     }
@@ -43,6 +46,10 @@ public class Product {
 
     public void setInventory(int inventory) {
         this.inventory = inventory;
+    }
+
+    public void reduceInventory() {
+        this.inventory -= 1;
     }
 
 }

@@ -8,33 +8,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Store {
+    Integer id;
+    String name;
     int cash;
+    private ArrayList<Integer> shoppingCart;
 
-    public Store(int cash) {
+
+    public Store(Integer id, String name, int cash) {
         this.cash = cash;
+        this.shoppingCart = new ArrayList<>();
     }
 
-    public boolean addProduct(Database database, String name, int price, int inventory) throws SQLException {
-        if ((name.length() > 3) && (price >= 0) && (inventory >= 0)) { // name must be at least 3 letters and numbers must be positive.
-            ProductDao productDB = new ProductDao(database);
-            Product product = new Product(0000, name, inventory, price); // id must be removed at some point
-            productDB.add(product);
-            return true;
-        } else {
-            return false;
+    public void addToCart(Integer id) throws SQLException {
+        shoppingCart.add(id);
+    }
+
+    public void getShoppingCart() {
+        for (Integer temp : shoppingCart) {
+            System.out.println("Cart: " + temp);
         }
-    }
-
-    public void listProducts(Database database) throws SQLException {
-        List<Product> products = new ArrayList<>();
-        ProductDao productDB = new ProductDao(database);
-        products = productDB.findAll();
-        for (Product product : products) {
-            System.out.println("name: " + product.getName() + " price: " + product.getPrice() + " inventory: " + product.getInventory());
-        }
-    }
-    public boolean buyProduct(Database database, int productId, int accountId) {
-        return true;
-
     }
 }

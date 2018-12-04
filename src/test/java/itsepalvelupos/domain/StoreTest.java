@@ -20,8 +20,6 @@ class StoreTest {
     void addProductActuallyAddsProduct()  throws Exception{
         Database database = new Database("test.db");
         database.initDatabase();
-        Store store = new Store(1000);
-        store.addProduct(database, "Pepsi", 5, 150);
         ProductDao product = new ProductDao(database);
         Product test = product.findOne(1);
         assertEquals(test.getName(), "Pepsi");

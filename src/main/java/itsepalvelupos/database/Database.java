@@ -51,6 +51,7 @@ public class Database {
 
         db.add("CREATE TABLE Products (id integer PRIMARY KEY, name varchar(100), inventory INT, price INT);");
         db.add("CREATE TABLE Accounts (id integer PRIMARY KEY, username varchar(100), password varchar(20), admin boolean);");
+        db.add("CREATE TABLE Store (id integer PRIMARY KEY, name varchar(100), cash integer);");
 
         return db;
     }

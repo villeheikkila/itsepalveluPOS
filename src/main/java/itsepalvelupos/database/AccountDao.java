@@ -52,6 +52,7 @@ public class AccountDao implements Dao<Account, Integer> {
         List<Account> accounts = new ArrayList<>();
         while (resultSet.next()) {
             Integer id = resultSet.getInt("id");
+            System.out.println(id);
             String username = resultSet.getString("username");
             String password = resultSet.getString("password");
             Boolean admin = resultSet.getBoolean("admin");
@@ -75,12 +76,13 @@ public class AccountDao implements Dao<Account, Integer> {
         connection.close();
     }
 
-    public Account findName(String name) throws SQLException {
+    public Account findName(String userName) throws SQLException {
         Connection connection = database.getConnection();
         PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Accounts WHERE username = ?");
-        stmt.setString(1, name);
+        stmt.setString(1, userName);
 
         ResultSet resultSet = stmt.executeQuery();
+
         boolean hasOne = resultSet.next();
         if (!hasOne) {
             return null;
@@ -106,6 +108,19 @@ public class AccountDao implements Dao<Account, Integer> {
         stmt.setString(1, account.getUsername());
         stmt.setString(2, account.getPassword());
         stmt.setBoolean(3, account.isAdmin());
+
+        stmt.executeUpdate();
+        stmt.close();
+        connection.close();
+    }
+
+    public void update(Account account) throws SQLException {
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("UPDATE Accounts SET username = ?, password = ?, admin = ? WHERE ?");
+        stmt.setString(1, account.getUsername());
+        stmt.setString(2, account.getPassword());
+        stmt.setBoolean(3, account.isAdmin());
+        stmt.setInt(4, account.getId());
 
         stmt.executeUpdate();
         stmt.close();

@@ -88,4 +88,17 @@ public class ProductDao implements Dao<Product, Integer> {
         stmt.close();
         connection.close();
     }
+
+    public void update(int id, Product product) throws SQLException {
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("UPDATE Products SET name = ?, inventory = ?, price = ? WHERE ?");
+        stmt.setString(1, product.getName());
+        stmt.setInt(2, product.getInventory());
+        stmt.setInt(3, product.getPrice());
+        stmt.setInt(4, id);
+
+        stmt.executeUpdate();
+        stmt.close();
+        connection.close();
+    }
 }

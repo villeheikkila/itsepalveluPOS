@@ -7,7 +7,10 @@ import com.jfoenix.controls.JFXTextField;
 
 import itsepalvelupos.database.AccountDao;
 import itsepalvelupos.database.Database;
+import itsepalvelupos.database.ProductDao;
 import itsepalvelupos.domain.Account;
+import itsepalvelupos.domain.AccountService;
+import itsepalvelupos.domain.ProductService;
 import itsepalvelupos.domain.Store;
 
 import javafx.application.Application;
@@ -38,9 +41,20 @@ public class PosUI extends Application {
     public void init() throws Exception {
         database = new Database("pos.db");
         database.initDatabase();
-        Store store = new Store(1000);
-        store.addProduct(database, "Pepsi", 5, 150);
-        store.listProducts(database);
+        AccountDao accountdao = new AccountDao(database);
+        ProductDao productDao = new ProductDao(database);
+        ProductService productService = new ProductService(productDao);
+        AccountService accountservice = new AccountService(accountdao);
+        productService.addProduct("cokis", 10, 3);
+        accountservice.createUser("Pekka", "moi", false);
+        accountdao.findAll();
+        Account account = new Account(1, "Pekka", "hei", false);
+        accountdao.update(account);
+
+        productService.listProducts();
+        productService.buyProduct(1);
+        productService.listProducts();
+
     }
 
     @Override

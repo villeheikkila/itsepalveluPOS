@@ -27,6 +27,8 @@ public class Account {
         return admin;
     }
 
+    public void setAdmin(boolean admin) { this.admin = admin; }
+
     public boolean passwordEquals(String pass) {
         if (this.password.equals(pass)) {
             return true;
