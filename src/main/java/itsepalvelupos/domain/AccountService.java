@@ -12,6 +12,16 @@ public class AccountService {
         this.accountDao = accountDao;
     }
 
+    /**
+     * Metodilla voidaan kirjautua sisään annetun käyttäjän tiedoilla.
+     *
+     * @param   userName   Käyttäjän nimi (pituus vähintään 3 merkkiä)
+     * @param   password  Käyttäjän salasana (pituus vähintään 3 merkkiä)
+     *
+     *
+     * @return palauttaa true, jos kirjautuminen onnistuu tai false, jos käyttäjää ei ole tai salasana on väärin.
+     */
+
     public boolean login(String userName, String password) throws SQLException {
         Account account = accountDao.findName(userName);
 
@@ -27,6 +37,18 @@ public class AccountService {
         return false;
     }
 
+    /**
+     * Metodi lisää uuden käyttäjän Accounts tietokantatauluun
+     *
+     * @param   userName   Käyttäjän nimi (pituus vähintään 3 merkkiä)
+     * @param   password  Käyttäjän salasana (pituus vähintään 3 merkkiä)
+     * @param   admin   Ilmaisee onko käyttäjällä pääkäyttäjän oikeudet (totuusarvo)
+     * @param   balance   Käyttäjän saldo (positiivinen kokonaisluku)
+     *
+     *
+     * @return palauttaa true, jos tuotteelle annetut tiedot ovat kelvollisia tai false, jos syöte ei ole kelvollinen tai käyttäjä on jo olemassa.
+     */
+
     public boolean createUser(String userName, String password, boolean admin, int balance) throws SQLException  {
         if (accountDao.findName(userName) != null) {
             return false;
@@ -37,6 +59,15 @@ public class AccountService {
 
         return true;
     }
+
+    /**
+     * Metodi tekee annetusta käyttäjästä pääkäyttäjän.
+     *
+     * @param   id   Käyttäjän id (positiivinen kokonaisluku)
+     *
+     *
+     * @return palauttaa true, jos nykyisellä käyttäjällä on oikeus korottaa oikeuksia, muuten false.
+     */
 
     public boolean makeAdmin(Integer id) throws SQLException {
         if (currentUser.isAdmin() == true) {
@@ -49,9 +80,19 @@ public class AccountService {
         }
     }
 
+    /**
+     * Metodi kirjaa nykyisen käyttäjän ulos
+     *
+     */
+
     public void logOut() {
         currentUser = null;
     }
+
+    /**
+     * Metodi palauttaa nykyisen käyttäjän.
+     *
+     */
 
     public Account getCurrentUser() {
         return currentUser;

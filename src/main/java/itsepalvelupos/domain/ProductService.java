@@ -14,6 +14,17 @@ public class ProductService {
         this.productDao = productDao;
     }
 
+    /**
+     * Metodi lisää tuotteen annetuilla arvoilla Products tietokantatauluun.
+     *
+     * @param   name   Tuotteen nimi (pituus vähintään 3 kirjainta)
+     * @param   price  Tuotteen hinta (positiivinen kokonaisluku)
+     * @param   inventory   Tuotteiden lukumäärä (positiivinen kokonaisluku)
+     *
+     *
+     * @return palauttaa true, jos tuotteelle annetut tiedot ovat kelvollisia
+     */
+
     public boolean addProduct(String name, int price, int inventory) throws SQLException {
         if ((name.length() > 3) && (price >= 0) && (inventory >= 0)) { // name must be at least 3 letters and numbers must be positive.
             Product product = new Product(0000, name, inventory, price); // id must be removed at some point
@@ -23,6 +34,13 @@ public class ProductService {
             return false;
         }
     }
+
+    /**
+     * Metodi listaa kaikki tuotteet Products tietokantataulussa
+     *
+     *
+     * @return palauttaa listan Product olioita
+     */
 
     public List<Product> listProducts() throws SQLException {
         List<Product> products = productDao.findAll();
