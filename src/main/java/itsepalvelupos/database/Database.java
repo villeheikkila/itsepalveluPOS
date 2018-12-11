@@ -9,13 +9,35 @@ public class Database {
 
     private String databaseName;
 
+
+    /**
+     * Konstruktori määrittää käytettävän tietokannan nimen
+     *
+     * @param   databaseName   Tietokannan nimi
+     *
+     */
+
     public Database(String databaseName) {
         this.databaseName = databaseName;
     }
 
+
+    /**
+     * Metodi mahdollistaa yhdistämisen tietokantaan
+     *
+     * @return palauttaa yhteyden käytössä olevaan tietokantaan.
+     *
+     */
+
+
     public Connection getConnection() throws SQLException {
         return DriverManager.getConnection("jdbc:sqlite:" + databaseName);
     }
+
+    /**
+     * Metodi luo uuden tietokannan
+     *
+     */
 
     public void initDatabase() {
         File file = new File(databaseName);
@@ -36,6 +58,11 @@ public class Database {
             }
         }
     }
+
+    /**
+     * Metodi poistaa nykyisen tietokannan
+     *
+     */
 
     public void removeDatabase() {
         File file = new File(databaseName);

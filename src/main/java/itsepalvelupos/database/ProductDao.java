@@ -17,6 +17,14 @@ public class ProductDao implements Dao<Product, Integer> {
         this.database = database;
     }
 
+    /**
+     * Metodi hakee tuotteen tiedot tietokantataulusta
+     *
+     * @param   key   Tuotteen id tietokantataulussa
+     *
+     * @return palauttaa Tuote olion.
+     */
+
     @Override
     public Product findOne(Integer key) throws SQLException {
         Connection connection = database.getConnection();
@@ -43,6 +51,12 @@ public class ProductDao implements Dao<Product, Integer> {
         return product;
     }
 
+    /**
+     * Metodi hakee kaikki tuotteet tietokantataulusta
+     *
+     * @return palauttaa listan Product olioita.
+     */
+
     @Override
     public List<Product> findAll() throws SQLException {
         Connection connection = database.getConnection();
@@ -66,6 +80,14 @@ public class ProductDao implements Dao<Product, Integer> {
         return products;
     }
 
+    /**
+     * Metodi poistaa tuotteen tietokantataulusta
+     *
+     * @param   key   Tuotteen id tietokantataulussa
+     *
+     * @return palauttaa Tuote olion.
+     */
+
     @Override
     public void delete(Integer key) throws SQLException {
         Connection connection = database.getConnection();
@@ -76,6 +98,13 @@ public class ProductDao implements Dao<Product, Integer> {
         stmt.close();
         connection.close();
     }
+
+    /**
+     * Metodi hakee kaupan tiedot tietokantataulusta
+     *
+     * @param  product  Lisättävä Product olio
+     *
+     */
 
     public void add(Product product) throws SQLException {
         Connection connection = database.getConnection();
@@ -88,6 +117,14 @@ public class ProductDao implements Dao<Product, Integer> {
         stmt.close();
         connection.close();
     }
+
+    /**
+     * Metodi hakee tuotteen tiedot tietokantataulusta
+     *
+     * @param  id  Muokattavan käyttäjän id tietokantataulussa
+     * @param  product Product olio, jonka tiedoilla korvataan vanhat tiedot
+     *
+     */
 
     public void update(int id, Product product) throws SQLException {
         Connection connection = database.getConnection();

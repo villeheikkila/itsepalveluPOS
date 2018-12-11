@@ -17,6 +17,14 @@ public class AccountDao implements Dao<Account, Integer> {
         this.database = database;
     }
 
+    /**
+     * Metodi hakee käyttäjän tiedot tietokantataulusta
+     *
+     * @param   key   Käyttäjän id tietokantataulussa
+     *
+     * @return palauttaa Account olion
+     */
+
     @Override
     public Account findOne(Integer key) throws SQLException {
         Connection connection = database.getConnection();
@@ -44,6 +52,13 @@ public class AccountDao implements Dao<Account, Integer> {
         return account;
     }
 
+    /**
+     * Metodi hakee kaikki käyttäjät tietokantataulusta
+     *
+     * @return palauttaa listan Account olioita.
+     *
+     */
+
     @Override
     public List<Account> findAll() throws SQLException {
         Connection connection = database.getConnection();
@@ -66,6 +81,13 @@ public class AccountDao implements Dao<Account, Integer> {
         return accounts;
     }
 
+    /**
+     * Metodi poistaa käyttäjän tietokantataulusta
+     *
+     * @param   key   Käyttäjän id tietokantataulussa
+     *
+     */
+
     @Override
     public void delete(Integer key) throws SQLException {
         Connection connection = database.getConnection();
@@ -76,6 +98,14 @@ public class AccountDao implements Dao<Account, Integer> {
         stmt.close();
         connection.close();
     }
+
+    /**
+     * Metodi hakee käyttäjän tiedot tietokantataulusta
+     *
+     * @param   userName   Käyttäjän nimi tietokantataulussa
+     *
+     * @return palauttaa Account olion, jos käyttäjä löytyy tai null, mikäli käyttäjää ei löydy
+     */
 
     public Account findName(String userName) throws SQLException {
         Connection connection = database.getConnection();
@@ -104,6 +134,13 @@ public class AccountDao implements Dao<Account, Integer> {
         return account;
     }
 
+    /**
+     * Metodi lisää käyttäjän tiedot tietokantaan
+     *
+     * @param  account  Lisättävä Account olio
+     *
+     */
+
     public void add(Account account) throws SQLException {
         Connection connection = database.getConnection();
         PreparedStatement stmt = connection.prepareStatement("INSERT INTO Accounts (username, password, admin, balance) VALUES (?, ?, ?, ?)");
@@ -116,6 +153,13 @@ public class AccountDao implements Dao<Account, Integer> {
         stmt.close();
         connection.close();
     }
+
+    /**
+     * Metodi päivittää käyttäjän tiedot tietokantataulusta
+     *
+     * @param  account Account olio, jonka tiedoilla korvataan vanhat tiedot
+     *
+     */
 
     public void update(Account account) throws SQLException {
         Connection connection = database.getConnection();

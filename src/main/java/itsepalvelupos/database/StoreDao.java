@@ -15,6 +15,15 @@ public class StoreDao {
         this.database = database;
     }
 
+    /**
+     * Metodi hakee kaupan tiedot tietokantataulusta
+     *
+     * @param   key   Kaupan id tietokantataulussa
+     *
+     *
+     * @return palauttaa Store olion.
+     */
+
     public Store getStore(Integer key) throws SQLException {
         Connection connection = database.getConnection();
         PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Store WHERE id = ?");
