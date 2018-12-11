@@ -10,7 +10,7 @@ itsepalveluPOS on alusta esimerkiksi kerhotiloissa tapahtuvaa myyntiä varten. S
 
 [Työaikakirjanpito](dokumentaatio/tuntikirjanpito.md)
 
-[Käytöohje](dokumentaatio/kayttoohje.md)
+[Käyttöohje](dokumentaatio/kayttoohje.md)
 
 
 ## Julkaisut
