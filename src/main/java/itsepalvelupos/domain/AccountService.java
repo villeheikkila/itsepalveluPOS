@@ -81,6 +81,22 @@ public class AccountService {
     }
 
     /**
+     * Metodi tekee annetusta käyttäjästä pääkäyttäjän.
+     *
+     * @param  ammount   Vähennettävä summa (positiivinen kokonaisluku)
+     *
+     *
+     * @return palauttaa true, jos nykyisellä käyttäjällä on oikeus korottaa oikeuksia, muuten false.
+     */
+
+    public void reduceBalance(Integer ammount) throws SQLException {
+        int current = currentUser.getBalance();
+        currentUser.setBalance(current - ammount);
+        accountDao.update(currentUser);
+    }
+
+
+    /**
      * Metodi kirjaa nykyisen käyttäjän ulos
      *
      */

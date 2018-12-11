@@ -8,18 +8,37 @@ public class Store {
     Integer id;
     String name;
     int cash;
-    private ArrayList<Integer> shoppingCart;
 
     public Store(Integer id, String name, int cash) {
         this.cash = cash;
-        this.shoppingCart = new ArrayList<>();
     }
 
-    public void addToCart(Integer id) {
-        shoppingCart.add(id);
+
+    public Integer getId() {
+        return id;
     }
 
-    public ArrayList<Integer> getShoppingCart() {
-        return this.shoppingCart;
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getCash() {
+        return cash;
+    }
+
+    public void addCash(int ammount) {
+        this.cash += ammount;
+    }
+
+    public void setCash(int cash) {
+        this.cash = cash;
     }
 }

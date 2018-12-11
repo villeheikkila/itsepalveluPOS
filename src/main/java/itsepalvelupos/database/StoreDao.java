@@ -47,4 +47,23 @@ public class StoreDao {
 
         return store;
     }
+
+    /**
+     * Metodi päivittää käyttäjän tiedot tietokantataulusta
+     *
+     * @param  store Store olio, jonka tiedoilla korvataan vanhat tiedot
+     *
+     */
+
+    public void update(Store store) throws SQLException {
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("UPDATE Store SET name = ?, cash = ? WHERE ?");
+        stmt.setString(1, store.getName());
+        stmt.setInt(2, store.getCash());
+        stmt.setInt(3, store.getId());
+
+        stmt.executeUpdate();
+        stmt.close();
+        connection.close();
+    }
 }

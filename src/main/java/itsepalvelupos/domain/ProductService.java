@@ -46,14 +46,23 @@ public class ProductService {
         List<Product> products = productDao.findAll();
         return products;
     }
-    public boolean buyProduct(int id) throws SQLException {
+
+    /**
+     * Metodi vähentää annetun tuotteen määrää vastastossa yhdellä.
+     *
+     * @param   id   Tuotteen id (positiivinen kokonaisluku)
+     *
+     * @return palauttaa tuotteen hinnan, jos sellainen on olemassa tai muuten 0
+     */
+
+    public int buyProduct(int id) throws SQLException {
         if (productDao.findOne(id) != null) {
             Product product = productDao.findOne(id);
             product.reduceInventory();
             productDao.update(id, product);
-            return true;
+            return product.getPrice();
         } else {
-            return false;
+            return 0;
         }
     }
 }
