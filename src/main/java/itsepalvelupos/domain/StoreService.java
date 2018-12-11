@@ -70,7 +70,7 @@ public class StoreService {
     }
 
     /**
-     * Metodi lisää tuotteen ostoskoriin
+     * Metodi lisää tuotteen ostoskoriin. Saman tuotteen voi lisätä vain kerran.
      *
      * @param   id   Tuotteen id (positiivinen kokonaisluku)
      *
