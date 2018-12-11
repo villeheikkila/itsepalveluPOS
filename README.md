@@ -16,6 +16,7 @@ itsepalveluPOS on alusta esimerkiksi kerhotiloissa tapahtuvaa myyntiä varten. S
 ## Julkaisut
 
 [Viikko 5](https://github.com/villeheikkila/itsepalveluPOS/releases/tag/viikko5)
+
 [Viikko 6](https://github.com/villeheikkila/itsepalveluPOS/releases/tag/1.0)
 
 ## Komentorivitoiminnot
