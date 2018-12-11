@@ -87,7 +87,8 @@ public class StoreService {
             }
             shoppingCart.add(id);
             return true;
-        } return false;
+        }
+        return false;
     }
 
     /**
