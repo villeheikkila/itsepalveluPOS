@@ -163,7 +163,7 @@ public class AccountDao implements Dao<Account, Integer> {
 
     public void update(Account account) throws SQLException {
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("UPDATE Accounts SET username = ?, password = ?, admin = ?, balance = ? WHERE ?");
+        PreparedStatement stmt = connection.prepareStatement("UPDATE Accounts SET username = ?, password = ?, admin = ?, balance = ? WHERE id = ?");
         stmt.setString(1, account.getUsername());
         stmt.setString(2, account.getPassword());
         stmt.setBoolean(3, account.isAdmin());

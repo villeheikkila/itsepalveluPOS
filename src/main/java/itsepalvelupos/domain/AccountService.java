@@ -25,7 +25,7 @@ public class AccountService {
     public boolean login(String userName, String password) throws SQLException {
         Account account = accountDao.findName(userName);
 
-        if (userName == null) {
+        if (account == null) {
             return false;
         }
 
@@ -37,6 +37,10 @@ public class AccountService {
         return false;
     }
 
+    public Account find(String userName) throws SQLException {
+        Account account = accountDao.findName(userName);
+        return account;
+    }
     /**
      * Metodi lisää uuden käyttäjän Accounts tietokantatauluun
      *
@@ -81,12 +85,12 @@ public class AccountService {
     }
 
     /**
-     * Metodi tekee annetusta käyttäjästä pääkäyttäjän.
+     * Metodi vähentää annettavan summan käyttäjän saldosta.
      *
      * @param  ammount   Vähennettävä summa (positiivinen kokonaisluku)
      *
      *
-     * @return palauttaa true, jos nykyisellä käyttäjällä on oikeus korottaa oikeuksia, muuten false.
+     * @return palauttaa true, jos rahaa on tarpeeksi.
      */
 
     public void reduceBalance(Integer ammount) throws SQLException {
@@ -95,7 +99,11 @@ public class AccountService {
         accountDao.update(currentUser);
     }
 
-
+    public void changeBalance(Integer ammount) throws SQLException {
+        int current = currentUser.getBalance();
+        currentUser.setBalance(current + ammount);
+        accountDao.update(currentUser);
+    }
     /**
      * Metodi kirjaa nykyisen käyttäjän ulos
      *

@@ -16,10 +16,8 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.*;
 import javafx.scene.layout.HBox;
@@ -34,6 +32,9 @@ import java.util.List;
 public class PosUI extends Application {
 
     private StoreService storeService;
+    private Scene loginWindow;
+    private Scene mainWindow;
+    private Scene userWindow;
 
     @Override
     public void init() throws Exception {
@@ -48,7 +49,6 @@ public class PosUI extends Application {
     public void start(Stage primaryStage)  {
         // Sisäänkirjautuminen
 
-        primaryStage.setTitle("itsepalveluPOS");
 
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
@@ -73,34 +73,140 @@ public class PosUI extends Application {
         JFXPasswordField passwordBox = new JFXPasswordField();
         grid.add(passwordBox, 1, 2);
 
-        JFXButton button = new JFXButton("Lisää käyttäjä");
-        button.getStyleClass().add("button-raised");
+        JFXButton createButton = new JFXButton("Lisää käyttäjä");
+        createButton.getStyleClass().add("button-raised");
 
         HBox hotBoxButton = new HBox(10);
         hotBoxButton.setAlignment(Pos.BOTTOM_RIGHT);
-        hotBoxButton.getChildren().add(button);
+        hotBoxButton.getChildren().add(createButton);
         grid.add(hotBoxButton, 1, 4);
 
-        final Text actionTarget = new Text();
-        grid.add(actionTarget, 1, 6);
+        JFXButton loginButton = new JFXButton("Kirjaudu sisään");
+        loginButton.getStyleClass().add("button-raised");
 
-        button.setOnAction(new EventHandler<ActionEvent>() {
+        HBox loginHotBoxButton = new HBox(10);
+        loginHotBoxButton.setAlignment(Pos.BOTTOM_RIGHT);
+        loginHotBoxButton.getChildren().add(loginButton);
+        grid.add(loginHotBoxButton, 0, 4);
+
+        final Text actionTarget = new Text();
+        grid.add(actionTarget, 0, 6);
+
+        loginButton.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent e) {
                 actionTarget.setFill(Color.FIREBRICK);
                 if ((!userTextField.getText().isEmpty() && !passwordBox.getText().isEmpty())) {
                     actionTarget.setText("Käyttäjä tunnus: " + userTextField.getText() + " Salasana:" + passwordBox.getText());
+                    try {
+                        if (storeService.getAccountService().login(userTextField.getText(), passwordBox.getText())) {
+                            primaryStage.setScene(mainWindow);
+                        }
+                    } catch(Exception ex) {
+                        System.out.printf("SQL Exception");
+                    }
+                } else {
+                    actionTarget.setText("Käyttäjätunnus tai salasana puuttuu");
+                }
+                System.out.println(storeService.getAccountService().getCurrentUser());
+            }
+        });
+
+        createButton.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+                actionTarget.setFill(Color.FIREBRICK);
+                if ((!userTextField.getText().isEmpty() && !passwordBox.getText().isEmpty())) {
+                    actionTarget.setText("Käyttäjä tunnus: " + userTextField.getText() + " Salasana:" + passwordBox.getText());
+                    try {
+                        System.out.println("Lisättiin käyttäjä: " + userTextField.getText());
+                        storeService.getAccountService().createUser(userTextField.getText(), passwordBox.getText(), false, 0);
+                        storeService.getAccountService().login(userTextField.getText(), passwordBox.getText());
+                        primaryStage.setScene(userWindow);
+                    } catch(Exception ex) {
+                        System.out.printf("SQL Exception");
+                    }
                 } else {
                     actionTarget.setText("Käyttäjätunnus tai salasana puuttuu");
                 }
             }
         });
 
-        Scene scene = new Scene(grid, 600, 350);
-        scene.getStylesheets().add("itsepalvelupos/ui/stylesheet.css");
-        primaryStage.setScene(scene);
+
+        loginWindow = new Scene(grid, 800, 600);
+        loginWindow.getStylesheets().add("itsepalvelupos/ui/stylesheet.css");
+
+        // Pääikkuna
+
+        ScrollPane todoScollbar = new ScrollPane();
+        BorderPane mainPane = new BorderPane(todoScollbar);
+        mainWindow = new Scene(mainPane, 300, 250);
+
+        // Käyttäjä
+
+        GridPane userGrid = new GridPane();
+        userGrid.setAlignment(Pos.CENTER);
+        userGrid.setHgap(10);
+        userGrid.setVgap(10);
+        userGrid.setPadding(new Insets(25, 25, 25, 25));
+
+        Text cashTitle = new Text("Lisää rahaa tilille");
+        if (storeService.getAccountService().getCurrentUser()!=null) {
+            System.out.println(storeService.getAccountService().getCurrentUser().getUsername());
+        }
+        cashTitle.setFont(Font.font("Verdana", FontWeight.NORMAL, 30));
+        userGrid.add(cashTitle, 0, 0, 2, 1);
+
+        Label cash = new Label("Summa:");
+        userGrid.add(cash, 0, 1);
+
+        JFXTextField cashTextField = new JFXTextField();
+        cashTextField.setLabelFloat(true);
+        userGrid.add(cashTextField, 1, 1);
+
+        JFXButton cashButton = new JFXButton("Lisää");
+        cashButton.getStyleClass().add("button-raised");
+
+        HBox cashHotBoxButton = new HBox(10);
+        cashHotBoxButton.setAlignment(Pos.BOTTOM_RIGHT);
+        cashHotBoxButton.getChildren().add(cashButton);
+        userGrid.add(cashHotBoxButton, 1, 4);
+
+        cashButton.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+                actionTarget.setFill(Color.FIREBRICK);
+                if ((!cashTextField.getText().isEmpty())) {
+                    actionTarget.setText("Summa: " + cashTextField.getText());
+                        try {
+                            System.out.println(storeService.getAccountService().getCurrentUser().getId());
+                            storeService.getAccountService().changeBalance(Integer.parseInt(cashTextField.getText()));
+                            System.out.println(storeService.getAccountService().getCurrentUser().getBalance());
+                            System.out.println(storeService.getAccountService().getCurrentUser().getId());
+
+                            primaryStage.setScene(mainWindow);
+                    } catch(Exception ex) {
+                        System.out.printf("SQL Exception");
+                    }
+                } else {
+                    actionTarget.setText("Käyttäjätunnus tai salasana puuttuu");
+                }
+            }
+        });
+
+        userWindow = new Scene(userGrid, 600, 200);
+
+        // Luodaan primary stage
+
+        primaryStage.setTitle("itsepalveluPOS");
+        primaryStage.setScene(loginWindow);
         primaryStage.show();
+        primaryStage.setOnCloseRequest(e-> {
+            System.out.println("Suljetaan sovellus");
+        });
     }
 
 
