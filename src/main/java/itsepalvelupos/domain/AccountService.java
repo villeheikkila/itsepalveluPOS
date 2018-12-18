@@ -54,7 +54,7 @@ public class AccountService {
             return false;
         }
 
-        Account account = new Account(0000, userName, password, admin, balance);
+        Account account = new Account(userName, password, admin, balance);
         accountDao.add(account);
 
         return true;

@@ -13,7 +13,6 @@ public class Store {
         this.cash = cash;
     }
 
-
     public Integer getId() {
         return id;
     }

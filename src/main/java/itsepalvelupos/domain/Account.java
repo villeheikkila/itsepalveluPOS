@@ -15,6 +15,14 @@ public class Account {
         this.balance = balance;
     }
 
+    public Account(String username, String password, boolean admin, int balance) {
+        this.username = username;
+        this.password = password;
+        this.admin = admin;
+        this.balance = balance;
+    }
+
+
     public int getId() {
         return id;
     }

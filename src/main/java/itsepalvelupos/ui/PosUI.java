@@ -46,6 +46,7 @@ public class PosUI extends Application {
 
     @Override
     public void start(Stage primaryStage)  {
+        // Sisäänkirjautuminen
 
         primaryStage.setTitle("itsepalveluPOS");
 

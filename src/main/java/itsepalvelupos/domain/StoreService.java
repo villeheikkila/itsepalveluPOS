@@ -55,8 +55,7 @@ public class StoreService {
 
         return false;
     }
-
-
+    
     /**
      * Metodi ostaa kaikki tuotteet ostoskorissa ja tyhjentää lopuksi ostoskorin
      *
