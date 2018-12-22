@@ -1,21 +1,17 @@
 package itsepalvelupos.database;
 
-import itsepalvelupos.domain.AccountService;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.OutputStream;
-import java.io.PrintStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import static junit.framework.TestCase.assertNotNull;
+import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertFalse;
 
-import static org.junit.Assert.*;
 
 public class DatabaseTest {
 
@@ -23,7 +19,7 @@ public class DatabaseTest {
     private Database database;
 
     @Before
-    public void setUp() throws SQLException {
+    public void setUp() {
         databaseName = "testDatabase.db";
         database = new Database(databaseName);
         database.initDatabase();
@@ -31,7 +27,7 @@ public class DatabaseTest {
     }
 
     @After
-    public void removeDB() throws SQLException {
+    public void removeDB() {
         File file = new File(databaseName);
         file.delete();
     }

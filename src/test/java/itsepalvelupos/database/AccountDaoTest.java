@@ -1,13 +1,10 @@
 package itsepalvelupos.database;
 
 import itsepalvelupos.domain.Account;
-import itsepalvelupos.domain.Store;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -26,7 +23,6 @@ public class AccountDaoTest {
         accountDao = new AccountDao(database);
         account = new Account("account", "pass", true, 50);
         accountDao.add(account);
-
     }
 
     @After
@@ -61,7 +57,6 @@ public class AccountDaoTest {
         assertEquals(accounts.get(1).getPassword(), "pass");
         assertEquals(accounts.get(1).getBalance(), 50);
         assertEquals(accounts.get(1).isAdmin(), true);
-
     }
 
     @Test

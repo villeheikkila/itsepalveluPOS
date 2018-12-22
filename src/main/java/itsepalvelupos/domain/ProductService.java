@@ -1,10 +1,7 @@
 package itsepalvelupos.domain;
 
-import itsepalvelupos.database.Database;
 import itsepalvelupos.database.ProductDao;
-
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ProductService {

@@ -4,7 +4,6 @@ import itsepalvelupos.database.AccountDao;
 import itsepalvelupos.database.Database;
 import itsepalvelupos.database.ProductDao;
 import itsepalvelupos.database.StoreDao;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 

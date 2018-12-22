@@ -30,7 +30,6 @@ public class ProductServiceTest {
 
         productDao = new ProductDao(database);
         productService = new ProductService(productDao);
-
     }
 
     @After
@@ -56,7 +55,6 @@ public class ProductServiceTest {
         productService.addProduct("productTwo", 10, 1);
         assertEquals(productService.listProducts().get(0).getName(), "product");
         assertEquals(productService.listProducts().get(1).getName(), "productTwo");
-
     }
 
     @Test
@@ -64,12 +62,10 @@ public class ProductServiceTest {
         productService.addProduct("product", 10, 2);
         assertEquals(productService.buyProduct(1), 10);
         assertEquals(productDao.findOne(1).getInventory(), 1);
-
     }
 
     @Test
     public void buyProductFail() throws SQLException {
         assertEquals(productService.buyProduct(1), 0);
-
     }
 }

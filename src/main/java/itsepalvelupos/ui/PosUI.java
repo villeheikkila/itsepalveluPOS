@@ -1,15 +1,9 @@
 package itsepalvelupos.ui;
 
-
+import itsepalvelupos.domain.*;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
-
-import itsepalvelupos.database.AccountDao;
-import itsepalvelupos.database.Database;
-import itsepalvelupos.database.ProductDao;
-import itsepalvelupos.domain.*;
-
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -21,14 +15,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.*;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-
 import java.sql.SQLException;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
+
 
 
 public class PosUI extends Application {

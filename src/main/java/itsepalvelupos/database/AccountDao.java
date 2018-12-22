@@ -1,12 +1,12 @@
 package itsepalvelupos.database;
 
+import itsepalvelupos.domain.Account;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import itsepalvelupos.domain.Account;
 
 
 public class AccountDao implements Dao<Account, Integer> {

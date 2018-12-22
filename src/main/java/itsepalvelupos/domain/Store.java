@@ -1,9 +1,5 @@
 package itsepalvelupos.domain;
 
-
-import java.sql.SQLException;
-import java.util.ArrayList;
-
 public class Store {
     Integer id;
     String name;

@@ -125,6 +125,4 @@ public class AccountService {
     public Account getCurrentUser() {
         return currentUser;
     }
-
-
 }

@@ -1,12 +1,8 @@
 package itsepalvelupos.domain;
 
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Test;
 import org.junit.Before;
-import org.junit.runner.RunWith;
-
-
 import itsepalvelupos.database.AccountDao;
 import itsepalvelupos.database.Database;
 import itsepalvelupos.database.ProductDao;
@@ -34,15 +30,13 @@ public class AccountServiceTest {
         database.initDatabase();
 
         accountDao = new AccountDao(database);
-
         accountService = new AccountService(accountDao);
-
         Account account = new Account("username", "password", false, 100);
-        accountDao.add(account);
         Account currentUser = new Account("current", "pass", true, 50);
+
+        accountDao.add(account);
         accountDao.add(currentUser);
         accountService.login("current", "pass");
-
     }
 
 
