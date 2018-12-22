@@ -133,5 +133,9 @@ public class PosService {
         return newDatabase;
     }
 
+    public void deleteDatabase() {
+        database.removeDatabase();
+    }
+
     public StoreService getStoreService() { return storeService; }
 }

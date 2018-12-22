@@ -1,9 +1,9 @@
 package itsepalvelupos.ui;
 
-import itsepalvelupos.domain.*;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import itsepalvelupos.domain.PosService;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -16,7 +16,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import java.sql.SQLException;
-
+import java.util.Optional;
 
 
 public class PosUI extends Application {
@@ -35,7 +35,6 @@ public class PosUI extends Application {
 
     @Override
     public void stop() throws SQLException {
-        deleteDatabaseDialog();
     }
 
     @Override
@@ -294,11 +293,27 @@ public class PosUI extends Application {
         primaryStage.setScene(dataWindow);
         primaryStage.show();
         primaryStage.setOnCloseRequest(e-> {
-            System.out.println("Suljetaan sovellus");
+            deleteDatabaseDialog();
+            System.out.println("Program will be closed");
         });
     }
 
     private void deleteDatabaseDialog() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Haluatko poistaa tietokannan?");
+        alert.setHeaderText("Poistetaanko tietokanta?");
+
+        ButtonType deleteDatabase = new ButtonType("Poista");
+        ButtonType retainDatabase = new ButtonType("Säilytä");
+
+        alert.getButtonTypes().setAll(deleteDatabase, retainDatabase);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == deleteDatabase){
+            posService.deleteDatabase();
+        } else if (result.get() == retainDatabase) {
+            System.out.println("Tietokantaa ei poisteta");
+        }
     }
 
     public static void main(String[] args) throws Exception {
