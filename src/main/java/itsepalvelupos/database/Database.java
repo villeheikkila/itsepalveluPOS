@@ -40,16 +40,17 @@ public class Database {
     }
 
     /**
-     * Metodi luo uuden tietokannan
+     * Metodi luo uuden tietokannan, jos sellaista ei vielä ole
      *
      */
 
-    public void initDatabase() {
+    public boolean initDatabase() {
 
         File file = new File(databaseName);
 
         if (file.exists()) {
             System.out.println("Error: Database already exists");
+            return false;
         } else {
             List<String> statements = statements();
             try (Connection conn = getConnection()) {
@@ -65,7 +66,7 @@ public class Database {
             } catch (Throwable t) {
                 System.out.println("Error: " + t.getMessage());
             }
-        }
+        } return true;
     }
 
     /**

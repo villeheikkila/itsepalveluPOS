@@ -5,8 +5,6 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -23,25 +21,138 @@ import java.sql.SQLException;
 
 public class PosUI extends Application {
 
-    private StoreService storeService;
+    private PosService posService;
     private Scene loginWindow;
     private Scene mainWindow;
+    private Scene dataWindow;
+    private Scene storeWindow;
     private Scene userWindow;
+
 
     @Override
     public void init() throws Exception {
-        storeService = new StoreService("pos.db", 1);
     }
 
     @Override
     public void stop() throws SQLException {
-        storeService.getDatabase().removeDatabase();
+        deleteDatabaseDialog();
     }
 
     @Override
     public void start(Stage primaryStage)  {
-        // Sisäänkirjautuminen
+        // Tietokannan luominen
 
+        GridPane dataGrid = new GridPane();
+        dataGrid.setAlignment(Pos.CENTER);
+        dataGrid.setHgap(10);
+        dataGrid.setVgap(10);
+        dataGrid.setPadding(new Insets(25, 25, 25, 25));
+
+        Text dataTitle = new Text("Tervetuloa! ");
+
+        dataTitle.setFont(Font.font("Verdana", FontWeight.NORMAL, 30));
+        dataGrid.add(dataTitle, 0, 0, 2, 1);
+
+        Label databaseName = new Label("Tietokannan nimi:");
+        dataGrid.add(databaseName, 0, 1);
+
+        JFXTextField dataTextField = new JFXTextField();
+        dataTextField.setLabelFloat(true);
+        dataGrid.add(dataTextField, 1, 1);
+
+        JFXButton dataButton = new JFXButton("Lisää");
+        dataButton.getStyleClass().add("button-raised");
+
+        HBox dataHotBoxButton = new HBox(10);
+        dataHotBoxButton.setAlignment(Pos.BOTTOM_RIGHT);
+        dataHotBoxButton.getChildren().add(dataButton);
+        dataGrid.add(dataHotBoxButton, 1, 4);
+
+        final Text dataActionTarget = new Text();
+        dataGrid.add(dataActionTarget, 0, 6);
+
+        dataButton.setOnAction(e -> {
+            dataActionTarget.setFill(Color.FIREBRICK);
+            if ((!dataTextField.getText().isEmpty())) {
+                try {
+                    posService = new PosService(dataTextField.getText());
+
+                    if (posService.isNewDatabase()) {
+                        primaryStage.setScene(storeWindow);
+                    } else {
+                        primaryStage.setScene(loginWindow);
+                    }
+                } catch(Exception ex) {
+                    System.out.printf("SQL Exception");
+                }
+            } else {
+                dataActionTarget.setText("Tietokannan nimi puuttuu");
+            }
+        });
+
+        dataWindow = new Scene(dataGrid, 800, 600);
+        dataWindow.getStylesheets().add("itsepalvelupos/ui/stylesheet.css");
+
+        // Kaupan luominen
+
+        GridPane storeGrid = new GridPane();
+        storeGrid.setAlignment(Pos.CENTER);
+        storeGrid.setHgap(10);
+        storeGrid.setVgap(10);
+        storeGrid.setPadding(new Insets(25, 25, 25, 25));
+
+        Text storeTitle = new Text("Luodaan uusi kauppa!");
+        storeTitle.setFont(Font.font("Verdana", FontWeight.NORMAL, 30));
+        storeGrid.add(storeTitle, 0, 0, 2, 1);
+
+        Label storeName = new Label("Kaupan nimi");
+        storeGrid.add(storeName, 0, 1);
+
+        JFXTextField storeTextField = new JFXTextField();
+        storeTextField.setLabelFloat(true);
+        storeGrid.add(storeTextField, 1, 1);
+
+        Label storeCash = new Label("Kaupan kassan saldo alussa:");
+        storeGrid.add(storeCash, 0, 2);
+
+        JFXTextField cashField = new JFXTextField();
+        storeTextField.setLabelFloat(true);
+        storeGrid.add(cashField, 1, 2);
+
+        JFXButton createStoreButton = new JFXButton("Lisää kauppa");
+        createStoreButton.getStyleClass().add("button-raised");
+
+        HBox storeHotBoxButton = new HBox(10);
+        storeHotBoxButton.setAlignment(Pos.BOTTOM_RIGHT);
+        storeHotBoxButton.getChildren().add(createStoreButton);
+        storeGrid.add(storeHotBoxButton, 1, 4);
+
+        final Text storeActionTarget = new Text();
+        storeGrid.add(storeActionTarget, 0, 6);
+
+        createStoreButton.setOnAction(e -> {
+            storeActionTarget.setFill(Color.FIREBRICK);
+            if ((!storeTextField.getText().isEmpty() && !cashField.getText().isEmpty())) {
+                try {
+                    if (posService.getStoreService().createStore(storeTextField.getText(), Integer.parseInt(cashField.getText()))) {
+                        System.out.println("Lisättiin kauppa: " + storeTextField.getText());
+                        primaryStage.setScene(loginWindow);
+                    } else {
+                        storeActionTarget.setText("Kauppa on jo olemassa tai sen nimi on liian lyhyt");
+                    }
+                } catch(Exception ex) {
+                    storeActionTarget.setText("Kassan saldon täytyy olla kokonaisluku");
+                    System.out.println("SQL Exception");
+                }
+            } else {
+                storeActionTarget.setText("Nimi tai kassan alkusumma puuttuu");
+            }
+        });
+
+        storeWindow = new Scene(storeGrid, 800, 600);
+        storeWindow.getStylesheets().add("itsepalvelupos/ui/stylesheet.css");
+
+        // Sisäänkirjautuminen
 
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
@@ -89,7 +200,7 @@ public class PosUI extends Application {
             actionTarget.setFill(Color.FIREBRICK);
             if ((!userTextField.getText().isEmpty() && !passwordBox.getText().isEmpty())) {
                 try {
-                    if (storeService.getAccountService().login(userTextField.getText(), passwordBox.getText())) {
+                    if (posService.getAccountService().login(userTextField.getText(), passwordBox.getText())) {
                         primaryStage.setScene(mainWindow);
                     } else {
                         actionTarget.setText("Käyttäjätunnus tai salasana on väärin");
@@ -100,14 +211,13 @@ public class PosUI extends Application {
             } else {
                 actionTarget.setText("Käyttäjätunnus tai salasana puuttuu");
             }
-            System.out.println(storeService.getAccountService().getCurrentUser());
         });
 
         createButton.setOnAction(e -> {
             actionTarget.setFill(Color.FIREBRICK);
             if ((!userTextField.getText().isEmpty() && !passwordBox.getText().isEmpty())) {
                 try {
-                    if (storeService.getAccountService().createUser(userTextField.getText(), passwordBox.getText(), false, 0)) {
+                    if (posService.getAccountService().createUser(userTextField.getText(), passwordBox.getText(), false, 0)) {
                         System.out.println("Lisättiin käyttäjä: " + userTextField.getText());
                         actionTarget.setText("Lisättiin käyttäjätunnus: " + userTextField.getText() + ". Voit nyt kirjautua sisään!");
                     } else {
@@ -164,7 +274,7 @@ public class PosUI extends Application {
             if ((!cashTextField.getText().isEmpty())) {
                 actionTarget.setText("Summa: " + cashTextField.getText());
                     try {
-                        storeService.getAccountService().changeBalance(Integer.parseInt(cashTextField.getText()));
+                        posService.getAccountService().changeBalance(Integer.parseInt(cashTextField.getText()));
                         primaryStage.setScene(mainWindow);
                 } catch(Exception ex) {
                     System.out.printf("SQL Exception");
@@ -176,16 +286,20 @@ public class PosUI extends Application {
 
         userWindow = new Scene(userGrid, 600, 200);
 
+
+
         // Luodaan primary stage
 
         primaryStage.setTitle("itsepalveluPOS");
-        primaryStage.setScene(loginWindow);
+        primaryStage.setScene(dataWindow);
         primaryStage.show();
         primaryStage.setOnCloseRequest(e-> {
             System.out.println("Suljetaan sovellus");
         });
     }
 
+    private void deleteDatabaseDialog() {
+    }
 
     public static void main(String[] args) throws Exception {
         launch(PosUI.class);

@@ -36,6 +36,7 @@ public class ProductDao implements Dao<Product, Integer> {
 
         ResultSet resultSet = stmt.executeQuery();
         boolean hasOne = resultSet.next();
+
         if (!hasOne) {
             resultSet.close();
             stmt.close();
