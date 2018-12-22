@@ -27,7 +27,6 @@ public class PosUI extends Application {
     private Scene loginWindow;
     private Scene mainWindow;
     private Scene userWindow;
-    private String currentUser;
 
     @Override
     public void init() throws Exception {
@@ -36,6 +35,7 @@ public class PosUI extends Application {
 
     @Override
     public void stop() throws SQLException {
+        storeService.getDatabase().removeDatabase();
     }
 
     @Override
@@ -85,46 +85,39 @@ public class PosUI extends Application {
         final Text actionTarget = new Text();
         grid.add(actionTarget, 0, 6);
 
-        loginButton.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent e) {
-                actionTarget.setFill(Color.FIREBRICK);
-                if ((!userTextField.getText().isEmpty() && !passwordBox.getText().isEmpty())) {
-                    actionTarget.setText("Käyttäjä tunnus: " + userTextField.getText() + " Salasana:" + passwordBox.getText());
-                    try {
-                        if (storeService.getAccountService().login(userTextField.getText(), passwordBox.getText())) {
-                            primaryStage.setScene(mainWindow);
-                        }
-                    } catch(Exception ex) {
-                        actionTarget.setText("Salasana on väärin");
+        loginButton.setOnAction(e -> {
+            actionTarget.setFill(Color.FIREBRICK);
+            if ((!userTextField.getText().isEmpty() && !passwordBox.getText().isEmpty())) {
+                try {
+                    if (storeService.getAccountService().login(userTextField.getText(), passwordBox.getText())) {
+                        primaryStage.setScene(mainWindow);
+                    } else {
+                        actionTarget.setText("Käyttäjätunnus tai salasana on väärin");
                     }
-                } else {
-                    actionTarget.setText("Käyttäjätunnus tai salasana puuttuu");
+                } catch(Exception ex) {
+                    actionTarget.setText("Salasana on väärin");
                 }
-                System.out.println(storeService.getAccountService().getCurrentUser());
+            } else {
+                actionTarget.setText("Käyttäjätunnus tai salasana puuttuu");
             }
+            System.out.println(storeService.getAccountService().getCurrentUser());
         });
 
-        createButton.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent e) {
-                actionTarget.setFill(Color.FIREBRICK);
-                if ((!userTextField.getText().isEmpty() && !passwordBox.getText().isEmpty())) {
-                    actionTarget.setText("Käyttäjä tunnus: " + userTextField.getText() + " Salasana:" + passwordBox.getText());
-                    try {
+        createButton.setOnAction(e -> {
+            actionTarget.setFill(Color.FIREBRICK);
+            if ((!userTextField.getText().isEmpty() && !passwordBox.getText().isEmpty())) {
+                try {
+                    if (storeService.getAccountService().createUser(userTextField.getText(), passwordBox.getText(), false, 0)) {
                         System.out.println("Lisättiin käyttäjä: " + userTextField.getText());
-                        storeService.getAccountService().createUser(userTextField.getText(), passwordBox.getText(), false, 0);
-                        storeService.getAccountService().login(userTextField.getText(), passwordBox.getText());
-                        currentUser = storeService.getAccountService().getCurrentUser().getUsername();
-                        primaryStage.setScene(userWindow);
-                    } catch(Exception ex) {
-                        System.out.printf("SQL Exception");
+                        actionTarget.setText("Lisättiin käyttäjätunnus: " + userTextField.getText() + ". Voit nyt kirjautua sisään!");
+                    } else {
+                        actionTarget.setText("Käyttäjätunnus on jo olemassa tai salasana tai käyttäjätunnus on liian lyhyt");
                     }
-                } else {
-                    actionTarget.setText("Käyttäjätunnus tai salasana puuttuu");
+                } catch(Exception ex) {
+                    System.out.printf("SQL Exception");
                 }
+            } else {
+                actionTarget.setText("Käyttäjätunnus tai salasana puuttuu");
             }
         });
 
@@ -146,11 +139,6 @@ public class PosUI extends Application {
         userGrid.setVgap(10);
         userGrid.setPadding(new Insets(25, 25, 25, 25));
 
-        if (storeService.getAccountService().getCurrentUser()!=null) {
-            currentUser = storeService.getAccountService().getCurrentUser().getUsername();
-            System.out.println(currentUser);
-        }
-
         Text cashTitle = new Text("Lisää rahaa nykyiselle käyttäjälle:");
 
         cashTitle.setFont(Font.font("Verdana", FontWeight.NORMAL, 30));
@@ -171,22 +159,18 @@ public class PosUI extends Application {
         cashHotBoxButton.getChildren().add(cashButton);
         userGrid.add(cashHotBoxButton, 1, 4);
 
-        cashButton.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent e) {
-                actionTarget.setFill(Color.FIREBRICK);
-                if ((!cashTextField.getText().isEmpty())) {
-                    actionTarget.setText("Summa: " + cashTextField.getText());
-                        try {
-                            storeService.getAccountService().changeBalance(Integer.parseInt(cashTextField.getText()));
-                            primaryStage.setScene(mainWindow);
-                    } catch(Exception ex) {
-                        System.out.printf("SQL Exception");
-                    }
-                } else {
-                    actionTarget.setText("Käyttäjätunnus tai salasana puuttuu");
+        cashButton.setOnAction(e -> {
+            actionTarget.setFill(Color.FIREBRICK);
+            if ((!cashTextField.getText().isEmpty())) {
+                actionTarget.setText("Summa: " + cashTextField.getText());
+                    try {
+                        storeService.getAccountService().changeBalance(Integer.parseInt(cashTextField.getText()));
+                        primaryStage.setScene(mainWindow);
+                } catch(Exception ex) {
+                    System.out.printf("SQL Exception");
                 }
+            } else {
+                actionTarget.setText("Käyttäjätunnus tai salasana puuttuu");
             }
         });
 

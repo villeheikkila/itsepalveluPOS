@@ -126,4 +126,6 @@ public class StoreService {
     public AccountService getAccountService() {
         return accountService;
     }
+
+    public Database getDatabase() { return database; }
 }

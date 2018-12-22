@@ -60,7 +60,7 @@ public class AccountService {
      */
 
     public boolean createUser(String userName, String password, boolean admin, int balance) throws SQLException  {
-        if (accountDao.findName(userName) != null) {
+        if ((accountDao.findName(userName) != null) || (password.length() < 3) || (password.length() < 3)) {
             return false;
         }
 
