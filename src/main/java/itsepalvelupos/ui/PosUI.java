@@ -200,7 +200,7 @@ public class PosUI extends Application {
             if ((!userTextField.getText().isEmpty() && !passwordBox.getText().isEmpty())) {
                 try {
                     if (posService.getAccountService().login(userTextField.getText(), passwordBox.getText())) {
-                        primaryStage.setScene(mainWindow);
+                        primaryStage.setScene(userWindow);
                     } else {
                         actionTarget.setText("Käyttäjätunnus tai salasana on väärin");
                     }
