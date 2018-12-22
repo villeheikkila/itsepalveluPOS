@@ -39,11 +39,7 @@ public class StoreDao {
             return null;
         }
 
-        Integer id = resultSet.getInt("id");
-        String name = resultSet.getString("name");
-        Integer cash = resultSet.getInt("cash");
-
-        Store store = new Store(id, name, cash);
+        Store store = new Store(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getInt("cash"));
 
         resultSet.close();
         stmt.close();
@@ -71,7 +67,7 @@ public class StoreDao {
     }
 
     /**
-     * Metodi päivittää käyttäjän tiedot tietokantataulusta
+     * Metodi päivittää kaupan tiedot tietokantataulusta
      *
      * @param  store Store olio, jonka tiedoilla korvataan vanhat tiedot
      *

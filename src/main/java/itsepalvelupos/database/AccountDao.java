@@ -40,13 +40,7 @@ public class AccountDao implements Dao<Account, Integer> {
             return null;
         }
 
-        Integer id = resultSet.getInt("id");
-        String username = resultSet.getString("username");
-        String password = resultSet.getString("password");
-        Boolean admin = resultSet.getBoolean("admin");
-        Integer balance = resultSet.getInt("balance");
-
-        Account account = new Account(id, username, password, admin, balance);
+        Account account = new Account(resultSet.getInt("id"), resultSet.getString("username"), resultSet.getString("password"), resultSet.getBoolean("admin"), resultSet.getInt("balance"));
 
         resultSet.close();
         stmt.close();
@@ -126,13 +120,7 @@ public class AccountDao implements Dao<Account, Integer> {
             return null;
         }
 
-        Integer id = resultSet.getInt("id");
-        String username = resultSet.getString("username");
-        String password = resultSet.getString("password");
-        Boolean admin = resultSet.getBoolean("admin");
-        Integer balance = resultSet.getInt("balance");
-
-        Account account = new Account(id, username, password, admin, balance);
+        Account account = new Account(resultSet.getInt("id"), resultSet.getString("username"), resultSet.getString("password"), resultSet.getBoolean("admin"), resultSet.getInt("balance"));
 
         resultSet.close();
         stmt.close();

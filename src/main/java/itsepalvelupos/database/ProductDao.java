@@ -40,12 +40,7 @@ public class ProductDao implements Dao<Product, Integer> {
             return null;
         }
 
-        Integer id = resultSet.getInt("id");
-        String name = resultSet.getString("name");
-        Integer inventory = resultSet.getInt("inventory");
-        Integer price = resultSet.getInt("price");
-
-        Product product = new Product(id, name, inventory, price);
+        Product product = new Product(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getInt("inventory"), resultSet.getInt("price"));
 
         resultSet.close();
         stmt.close();
