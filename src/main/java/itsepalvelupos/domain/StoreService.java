@@ -47,7 +47,8 @@ public class StoreService {
         if ((productDao.findOne(id) != null) && (accountService.getCurrentUser().getBalance() >= productDao.findOne(id).getPrice())) {
             int price = productDao.findOne(id).getPrice();
             productService.buyProduct(id);
-            accountService.reduceBalance(price);
+            int negPrice = -price;
+            accountService.changeBalance(negPrice);
             store.addCash(price);
             storeDao.update(store);
             return true;
@@ -91,7 +92,7 @@ public class StoreService {
     }
 
     /**
-     * Tyhjentää ostoskorin
+     * Metodi tyhjentää ostoskorin
      *
      */
 

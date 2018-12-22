@@ -85,19 +85,13 @@ public class AccountService {
     }
 
     /**
-     * Metodi vähentää annettavan summan käyttäjän saldosta.
+     * Metodi lisää annettavan summan käyttäjän saldoon..
      *
-     * @param  ammount   Vähennettävä summa (positiivinen kokonaisluku)
+     * @param  ammount   Lisättävä summa (kokonaisluku)
      *
      *
-     * @return palauttaa true, jos rahaa on tarpeeksi.
+     * @return palauttaa true, kunhan tili ei mene negatiiviseksi
      */
-
-    public void reduceBalance(Integer ammount) throws SQLException {
-        int current = currentUser.getBalance();
-        currentUser.setBalance(current - ammount);
-        accountDao.update(currentUser);
-    }
 
     public void changeBalance(Integer ammount) throws SQLException {
         int current = currentUser.getBalance();

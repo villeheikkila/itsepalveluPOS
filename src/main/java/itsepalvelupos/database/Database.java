@@ -40,7 +40,9 @@ public class Database {
      */
 
     public void initDatabase() {
+
         File file = new File(databaseName);
+
         if (file.exists()) {
             System.out.println("Error: Database already exists");
         } else {
@@ -52,6 +54,8 @@ public class Database {
                     System.out.println("Running command: " + statement);
                     stmt.executeUpdate(statement);
                 }
+
+                stmt.close();
 
             } catch (Throwable t) {
                 System.out.println("Error: " + t.getMessage());
@@ -65,11 +69,17 @@ public class Database {
      */
 
     public void removeDatabase() {
+
         File file = new File(databaseName);
+
         if (!file.exists()) {
             System.out.println("Error: Database doesn't exist");
         } else {
-            file.delete();
+            if (file.delete()) {
+                System.out.println("File deleted successfully");
+            } else {
+                System.out.println("Failed to delete the file");
+            }
         }
     }
 

@@ -27,6 +27,8 @@ import javafx.stage.Stage;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class PosUI extends Application {
@@ -35,6 +37,7 @@ public class PosUI extends Application {
     private Scene loginWindow;
     private Scene mainWindow;
     private Scene userWindow;
+    private String currentUser;
 
     @Override
     public void init() throws Exception {
@@ -104,7 +107,7 @@ public class PosUI extends Application {
                             primaryStage.setScene(mainWindow);
                         }
                     } catch(Exception ex) {
-                        System.out.printf("SQL Exception");
+                        actionTarget.setText("Salasana on väärin");
                     }
                 } else {
                     actionTarget.setText("Käyttäjätunnus tai salasana puuttuu");
@@ -124,6 +127,7 @@ public class PosUI extends Application {
                         System.out.println("Lisättiin käyttäjä: " + userTextField.getText());
                         storeService.getAccountService().createUser(userTextField.getText(), passwordBox.getText(), false, 0);
                         storeService.getAccountService().login(userTextField.getText(), passwordBox.getText());
+                        currentUser = storeService.getAccountService().getCurrentUser().getUsername();
                         primaryStage.setScene(userWindow);
                     } catch(Exception ex) {
                         System.out.printf("SQL Exception");
@@ -152,10 +156,13 @@ public class PosUI extends Application {
         userGrid.setVgap(10);
         userGrid.setPadding(new Insets(25, 25, 25, 25));
 
-        Text cashTitle = new Text("Lisää rahaa tilille");
         if (storeService.getAccountService().getCurrentUser()!=null) {
-            System.out.println(storeService.getAccountService().getCurrentUser().getUsername());
+            currentUser = storeService.getAccountService().getCurrentUser().getUsername();
+            System.out.println(currentUser);
         }
+
+        Text cashTitle = new Text("Lisää rahaa nykyiselle käyttäjälle:");
+
         cashTitle.setFont(Font.font("Verdana", FontWeight.NORMAL, 30));
         userGrid.add(cashTitle, 0, 0, 2, 1);
 
@@ -182,11 +189,7 @@ public class PosUI extends Application {
                 if ((!cashTextField.getText().isEmpty())) {
                     actionTarget.setText("Summa: " + cashTextField.getText());
                         try {
-                            System.out.println(storeService.getAccountService().getCurrentUser().getId());
                             storeService.getAccountService().changeBalance(Integer.parseInt(cashTextField.getText()));
-                            System.out.println(storeService.getAccountService().getCurrentUser().getBalance());
-                            System.out.println(storeService.getAccountService().getCurrentUser().getId());
-
                             primaryStage.setScene(mainWindow);
                     } catch(Exception ex) {
                         System.out.printf("SQL Exception");

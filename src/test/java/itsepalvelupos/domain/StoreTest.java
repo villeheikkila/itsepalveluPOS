@@ -1,26 +1,30 @@
 package itsepalvelupos.domain;
 
-import itsepalvelupos.database.Database;
-import itsepalvelupos.database.ProductDao;
-import itsepalvelupos.domain.Product;
-import itsepalvelupos.domain.Store;
-import java.io.File;
+import org.junit.Before;
+import org.junit.Test;
 
-import org.junit.jupiter.api.Test;
+import java.sql.SQLException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
-class StoreTest {
+public class StoreTest {
 
+    Store store;
 
-    public StoreTest() {
+    @Before
+    public void setUp() {
+        store = new Store("store", 100);
     }
 
     @Test
-    void addProductActuallyAddsProduct()  throws Exception{
+    public void addCash() {
+        store.addCash(10);
+        assertEquals(store.getCash(), 110);
     }
 
     @Test
-    void listProducts() {
+    public void addCashNegative() {
+        store.addCash(-10);
+        assertEquals(store.getCash(), 90);
     }
 }

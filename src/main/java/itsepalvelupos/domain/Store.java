@@ -10,6 +10,13 @@ public class Store {
     int cash;
 
     public Store(Integer id, String name, int cash) {
+        this.id = id;
+        this.name = name;
+        this.cash = cash;
+    }
+
+    public Store(String name, int cash) {
+        this.name = name;
         this.cash = cash;
     }
 

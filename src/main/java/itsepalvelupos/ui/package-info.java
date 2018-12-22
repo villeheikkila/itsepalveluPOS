@@ -1,0 +1,5 @@
+/**
+ * Käyttöliittymä
+ */
+
+package itsepalvelupos.ui;

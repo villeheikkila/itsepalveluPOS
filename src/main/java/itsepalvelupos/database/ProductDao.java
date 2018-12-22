@@ -34,6 +34,9 @@ public class ProductDao implements Dao<Product, Integer> {
         ResultSet resultSet = stmt.executeQuery();
         boolean hasOne = resultSet.next();
         if (!hasOne) {
+            resultSet.close();
+            stmt.close();
+            connection.close();
             return null;
         }
 
@@ -121,18 +124,17 @@ public class ProductDao implements Dao<Product, Integer> {
     /**
      * Metodi hakee tuotteen tiedot tietokantataulusta
      *
-     * @param  id  Muokattavan käyttäjän id tietokantataulussa
      * @param  product Product olio, jonka tiedoilla korvataan vanhat tiedot
      *
      */
 
-    public void update(int id, Product product) throws SQLException {
+    public void update(Product product) throws SQLException {
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("UPDATE Products SET name = ?, inventory = ?, price = ? WHERE ?");
+        PreparedStatement stmt = connection.prepareStatement("UPDATE Products SET name = ?, inventory = ?, price = ? WHERE id = ?");
         stmt.setString(1, product.getName());
         stmt.setInt(2, product.getInventory());
         stmt.setInt(3, product.getPrice());
-        stmt.setInt(4, id);
+        stmt.setInt(4, product.getId());
 
         stmt.executeUpdate();
         stmt.close();

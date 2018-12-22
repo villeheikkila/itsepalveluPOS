@@ -34,6 +34,9 @@ public class AccountDao implements Dao<Account, Integer> {
         ResultSet resultSet = stmt.executeQuery();
         boolean hasOne = resultSet.next();
         if (!hasOne) {
+            stmt.close();
+            connection.close();
+            resultSet.close();
             return null;
         }
 
@@ -72,6 +75,7 @@ public class AccountDao implements Dao<Account, Integer> {
             String password = resultSet.getString("password");
             Boolean admin = resultSet.getBoolean("admin");
             Integer balance = resultSet.getInt("balance");
+            accounts.add(new Account(id, username, password, admin, balance));
         }
 
         resultSet.close();
@@ -116,6 +120,9 @@ public class AccountDao implements Dao<Account, Integer> {
 
         boolean hasOne = resultSet.next();
         if (!hasOne) {
+            stmt.close();
+            connection.close();
+            resultSet.close();
             return null;
         }
 

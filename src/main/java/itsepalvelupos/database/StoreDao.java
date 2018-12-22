@@ -11,6 +11,7 @@ import java.sql.SQLException;
 public class StoreDao {
 
     private Database database;
+
     public StoreDao(Database database) {
         this.database = database;
     }
@@ -32,6 +33,9 @@ public class StoreDao {
         ResultSet resultSet = stmt.executeQuery();
         boolean hasOne = resultSet.next();
         if (!hasOne) {
+            resultSet.close();
+            stmt.close();
+            connection.close();
             return null;
         }
 
@@ -46,6 +50,24 @@ public class StoreDao {
         connection.close();
 
         return store;
+    }
+
+    /**
+     * Metodi lisää kaupan tietokantatauluun
+     *
+     * @param  store  Lisättävä Store olio
+     *
+     */
+
+    public void add(Store store) throws SQLException {
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("INSERT INTO Store (name, cash) VALUES (?, ?)");
+        stmt.setString(1, store.getName());
+        stmt.setInt(2, store.getCash());
+
+        stmt.executeUpdate();
+        stmt.close();
+        connection.close();
     }
 
     /**

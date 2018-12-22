@@ -26,8 +26,8 @@ public class ProductService {
      */
 
     public boolean addProduct(String name, int price, int inventory) throws SQLException {
-        if ((name.length() > 3) && (price >= 0) && (inventory >= 0)) { // name must be at least 3 letters and numbers must be positive.
-            Product product = new Product(name, inventory, price); // id must be removed at some point
+        if ((name.length() > 3) && (price >= 0) && (inventory >= 0)) {
+            Product product = new Product(name, inventory, price);
             productDao.add(product);
             return true;
         } else {
@@ -59,7 +59,7 @@ public class ProductService {
         if (productDao.findOne(id) != null) {
             Product product = productDao.findOne(id);
             product.reduceInventory();
-            productDao.update(id, product);
+            productDao.update(product);
             return product.getPrice();
         } else {
             return 0;
