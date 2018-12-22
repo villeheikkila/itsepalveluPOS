@@ -23,6 +23,9 @@ public class ProductDao implements Dao<Product, Integer> {
      * @param   key   Tuotteen id tietokantataulussa
      *
      * @return palauttaa Tuote olion.
+     *
+     * @throws SQLException mikäli tapahtuu virhe
+     *
      */
 
     @Override
@@ -53,6 +56,9 @@ public class ProductDao implements Dao<Product, Integer> {
      * Metodi hakee kaikki tuotteet tietokantataulusta
      *
      * @return palauttaa listan Product olioita.
+     *
+     * @throws SQLException mikäli tapahtuu virhe
+     *
      */
 
     @Override
@@ -83,7 +89,8 @@ public class ProductDao implements Dao<Product, Integer> {
      *
      * @param   key   Tuotteen id tietokantataulussa
      *
-     * @return palauttaa Tuote olion.
+     * @throws SQLException mikäli tapahtuu virhe
+     *
      */
 
     @Override
@@ -101,6 +108,8 @@ public class ProductDao implements Dao<Product, Integer> {
      * Metodi hakee kaupan tiedot tietokantataulusta
      *
      * @param  product  Lisättävä Product olio
+     *
+     * @throws SQLException mikäli tapahtuu virhe
      *
      */
 
@@ -121,6 +130,7 @@ public class ProductDao implements Dao<Product, Integer> {
      *
      * @param  product Product olio, jonka tiedoilla korvataan vanhat tiedot
      *
+     * @throws SQLException mikäli tapahtuu virhe
      */
 
     public void update(Product product) throws SQLException {

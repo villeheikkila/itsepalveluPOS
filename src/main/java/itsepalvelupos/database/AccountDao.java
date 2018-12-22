@@ -23,6 +23,9 @@ public class AccountDao implements Dao<Account, Integer> {
      * @param   key   Käyttäjän id tietokantataulussa
      *
      * @return palauttaa Account olion
+     *
+     * @throws SQLException mikäli tapahtuu virhe
+     *
      */
 
     @Override
@@ -54,6 +57,8 @@ public class AccountDao implements Dao<Account, Integer> {
      *
      * @return palauttaa listan Account olioita.
      *
+     * @throws SQLException mikäli tapahtuu virhe
+     *
      */
 
     @Override
@@ -84,6 +89,7 @@ public class AccountDao implements Dao<Account, Integer> {
      *
      * @param   key   Käyttäjän id tietokantataulussa
      *
+     * @throws SQLException mikäli tapahtuu virhe     *
      */
 
     @Override
@@ -103,6 +109,9 @@ public class AccountDao implements Dao<Account, Integer> {
      * @param   userName   Käyttäjän nimi tietokantataulussa
      *
      * @return palauttaa Account olion, jos käyttäjä löytyy tai null, mikäli käyttäjää ei löydy
+     *
+     * @throws SQLException mikäli tapahtuu virhe
+     *
      */
 
     public Account findName(String userName) throws SQLException {
@@ -134,6 +143,8 @@ public class AccountDao implements Dao<Account, Integer> {
      *
      * @param  account  Lisättävä Account olio
      *
+     * @throws SQLException mikäli tapahtuu virhe
+     *
      */
 
     public void add(Account account) throws SQLException {
@@ -153,6 +164,8 @@ public class AccountDao implements Dao<Account, Integer> {
      * Metodi päivittää käyttäjän tiedot tietokantataulusta
      *
      * @param  account Account olio, jonka tiedoilla korvataan vanhat tiedot
+     *
+     * @throws SQLException mikäli tapahtuu virhe
      *
      */
 

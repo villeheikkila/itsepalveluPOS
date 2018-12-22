@@ -20,6 +20,9 @@ public class AccountService {
      *
      *
      * @return palauttaa true, jos kirjautuminen onnistuu tai false, jos käyttäjää ei ole tai salasana on väärin.
+     *
+     * @throws SQLException mikäli tapahtuu virhe
+     *
      */
 
     public boolean login(String userName, String password) throws SQLException {
@@ -50,7 +53,10 @@ public class AccountService {
      * @param   balance   Käyttäjän saldo (positiivinen kokonaisluku)
      *
      *
-     * @return palauttaa true, jos tuotteelle annetut tiedot ovat kelvollisia tai false, jos syöte ei ole kelvollinen tai käyttäjä on jo olemassa.
+     * @return palauttaa true, jos tuotteelle annetut tiedot ovat kelvollisia tai false, jos syöte ei ole kelvollinen tai käyttäjä on jo olemassa
+     *
+     * @throws SQLException mikäli tapahtuu virhe
+     *
      */
 
     public boolean createUser(String userName, String password, boolean admin, int balance) throws SQLException  {
@@ -69,8 +75,10 @@ public class AccountService {
      *
      * @param   id   Käyttäjän id (positiivinen kokonaisluku)
      *
-     *
      * @return palauttaa true, jos nykyisellä käyttäjällä on oikeus korottaa oikeuksia, muuten false.
+     *
+     * @throws SQLException mikäli tapahtuu virhe
+     *
      */
 
     public boolean makeAdmin(Integer id) throws SQLException {
@@ -89,8 +97,8 @@ public class AccountService {
      *
      * @param  ammount   Lisättävä summa (kokonaisluku)
      *
+     * @throws SQLException mikäli tapahtuu virhe
      *
-     * @return palauttaa true, kunhan tili ei mene negatiiviseksi
      */
 
     public void changeBalance(Integer ammount) throws SQLException {
@@ -109,6 +117,8 @@ public class AccountService {
 
     /**
      * Metodi palauttaa nykyisen käyttäjän.
+     *
+     * @return palauttaa nykyisen käyttöjän
      *
      */
 

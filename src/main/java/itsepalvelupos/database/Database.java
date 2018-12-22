@@ -27,6 +27,8 @@ public class Database {
      *
      * @return palauttaa yhteyden käytössä olevaan tietokantaan.
      *
+     * @throws SQLException mikäli tapahtuu virhe
+     *
      */
 
 

@@ -41,6 +41,9 @@ public class StoreService {
      * @param   id   Tuotteen id (positiivinen kokonaisluku)
      *
      * @return palauttaa true, jos ostaminen on mahdollista
+     *
+     * @throws SQLException mikäli tapahtuu virhe
+     *
      */
 
     public boolean buy(int id) throws SQLException {
@@ -60,6 +63,8 @@ public class StoreService {
     /**
      * Metodi ostaa kaikki tuotteet ostoskorissa ja tyhjentää lopuksi ostoskorin
      *
+     * @throws SQLException mikäli tapahtuu virhe
+     *
      */
 
     public void buyCart() throws SQLException {
@@ -76,6 +81,9 @@ public class StoreService {
      *
      *
      * @return palauttaa true, jos lisääminen on mahdollista
+     *
+     * @throws SQLException mikäli tapahtuu virhe
+     *
      */
 
     public boolean addToCart(int id) throws SQLException {

@@ -23,6 +23,9 @@ public class ProductService {
      *
      *
      * @return palauttaa true, jos tuotteelle annetut tiedot ovat kelvollisia
+     *
+     * @throws SQLException mikäli tapahtuu virhe
+     *
      */
 
     public boolean addProduct(String name, int price, int inventory) throws SQLException {
@@ -38,8 +41,10 @@ public class ProductService {
     /**
      * Metodi listaa kaikki tuotteet Products tietokantataulussa
      *
-     *
      * @return palauttaa listan Product olioita
+     *
+     * @throws SQLException mikäli tapahtuu virhe
+     *
      */
 
     public List<Product> listProducts() throws SQLException {
@@ -53,6 +58,8 @@ public class ProductService {
      * @param   id   Tuotteen id (positiivinen kokonaisluku)
      *
      * @return palauttaa tuotteen hinnan, jos sellainen on olemassa tai muuten 0
+     *
+     * @throws SQLException mikäli tapahtuu virhe
      */
 
     public int buyProduct(int id) throws SQLException {

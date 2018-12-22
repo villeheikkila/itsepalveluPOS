@@ -21,8 +21,10 @@ public class StoreDao {
      *
      * @param   key   Kaupan id tietokantataulussa
      *
-     *
      * @return palauttaa Store olion.
+     *
+     * @throws SQLException mikäli tapahtuu virhe
+     *
      */
 
     public Store getStore(Integer key) throws SQLException {
@@ -53,6 +55,8 @@ public class StoreDao {
      *
      * @param  store  Lisättävä Store olio
      *
+     * @throws SQLException mikäli tapahtuu virhe
+     *
      */
 
     public void add(Store store) throws SQLException {
@@ -70,6 +74,8 @@ public class StoreDao {
      * Metodi päivittää kaupan tiedot tietokantataulusta
      *
      * @param  store Store olio, jonka tiedoilla korvataan vanhat tiedot
+     *
+     * @throws SQLException mikäli tapahtuu virhe
      *
      */
 
