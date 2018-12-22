@@ -5,8 +5,6 @@ import org.junit.Test;
 import org.junit.Before;
 import itsepalvelupos.database.AccountDao;
 import itsepalvelupos.database.Database;
-import itsepalvelupos.database.ProductDao;
-import itsepalvelupos.database.StoreDao;
 import static org.junit.Assert.*;
 
 import java.sql.SQLException;
@@ -15,12 +13,7 @@ public class AccountServiceTest {
 
     private Database database;
     private AccountService accountService;
-    private ProductService productService;
-
     private AccountDao accountDao;
-    private ProductDao productDao;
-    private StoreDao storeDao;
-
     private Account currentUser;
 
 
@@ -103,7 +96,7 @@ public class AccountServiceTest {
     }
 
     @After
-    public void removeDatabase() throws SQLException {
+    public void removeDatabase() {
         database.removeDatabase();
     }
 }

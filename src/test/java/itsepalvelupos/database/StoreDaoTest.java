@@ -33,13 +33,16 @@ public class StoreDaoTest {
 
     @Test
     public void getStore() throws SQLException {
-        assertEquals(storeDao.getStore(1).getName(), "store");
-        assertEquals(storeDao.getStore(1).getCash(), 1000);
+        assertEquals(storeDao.getStore().getName(), "store");
+        assertEquals(storeDao.getStore().getCash(), 1000);
     }
 
     @Test
     public void getStoreFalse() throws SQLException {
-        assertNull(storeDao.getStore(2));
+        database.removeDatabase();
+        database = new Database("test.db");
+        database.initDatabase();
+        assertNull(storeDao.getStore());
     }
 
     @Test
@@ -48,7 +51,7 @@ public class StoreDaoTest {
         store.setCash(500);
         store.setId(1);
         storeDao.update(store);
-        assertEquals(storeDao.getStore(1).getName(), "newStore");
-        assertEquals(storeDao.getStore(1).getCash(), 500);
+        assertEquals(storeDao.getStore().getName(), "newStore");
+        assertEquals(storeDao.getStore().getCash(), 500);
     }
 }

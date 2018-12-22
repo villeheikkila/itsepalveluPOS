@@ -1,6 +1,7 @@
 package itsepalvelupos.ui;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import itsepalvelupos.domain.PosService;
@@ -15,6 +16,8 @@ import javafx.scene.text.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.Optional;
 
@@ -92,6 +95,8 @@ public class PosUI extends Application {
         dataWindow = new Scene(dataGrid, 800, 600);
         dataWindow.getStylesheets().add("itsepalvelupos/ui/stylesheet.css");
 
+
+
         // Kaupan luominen
 
         GridPane storeGrid = new GridPane();
@@ -149,7 +154,7 @@ public class PosUI extends Application {
         });
 
         storeWindow = new Scene(storeGrid, 800, 600);
-        storeWindow.getStylesheets().add("itsepalvelupos/ui/stylesheet.css");
+        storeWindow.getStylesheets().add("/src/stylesheet.css");
 
         // Sisäänkirjautuminen
 
@@ -232,7 +237,7 @@ public class PosUI extends Application {
 
 
         loginWindow = new Scene(grid, 800, 600);
-        loginWindow.getStylesheets().add("itsepalvelupos/ui/stylesheet.css");
+        loginWindow.getStylesheets().add("/src/stylesheet.css");
 
         // Pääikkuna
 
@@ -268,18 +273,31 @@ public class PosUI extends Application {
         cashHotBoxButton.getChildren().add(cashButton);
         userGrid.add(cashHotBoxButton, 1, 4);
 
+        JFXCheckBox checkBox = new JFXCheckBox("Tee käyttäjästä admin");
+        checkBox.getStyleClass().add("custom-jfx-check-box");
+        userGrid.add(checkBox, 0, 3);
+
+        final Text userActionTarget = new Text();
+        userGrid.add(userActionTarget, 0, 5);
+
         cashButton.setOnAction(e -> {
-            actionTarget.setFill(Color.FIREBRICK);
+            userActionTarget.setFill(Color.FIREBRICK);
             if ((!cashTextField.getText().isEmpty())) {
-                actionTarget.setText("Summa: " + cashTextField.getText());
+                userActionTarget.setText("Summa: " + cashTextField.getText());
                     try {
                         posService.getAccountService().changeBalance(Integer.parseInt(cashTextField.getText()));
+                        if (checkBox.isSelected()) {
+                            posService.getAccountService().makeCurrentUserAdmin();
+                            userActionTarget.setText("Olet nyt admin");
+                            System.out.println("Olet admin");
+                            System.out.println(posService.getAccountService().getCurrentUser().isAdmin());
+                        }
                         primaryStage.setScene(mainWindow);
                 } catch(Exception ex) {
-                    System.out.printf("SQL Exception");
-                }
+                        userActionTarget.setText("Summan täytyy olla kokonaisluku");
+                    }
             } else {
-                actionTarget.setText("Käyttäjätunnus tai salasana puuttuu");
+                userActionTarget.setText("Käyttäjätunnus tai salasana puuttuu");
             }
         });
 
@@ -310,7 +328,9 @@ public class PosUI extends Application {
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == deleteDatabase){
-            posService.deleteDatabase();
+            if (posService != null) {
+                posService.deleteDatabase();
+            }
         } else if (result.get() == retainDatabase) {
             System.out.println("Tietokantaa ei poisteta");
         }

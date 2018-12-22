@@ -17,18 +17,15 @@ public class StoreDao {
     /**
      * Metodi hakee kaupan tiedot tietokantataulusta
      *
-     * @param   key   Kaupan id tietokantataulussa
-     *
      * @return palauttaa Store olion.
      *
      * @throws SQLException mikäli tapahtuu virhe
      *
      */
 
-    public Store getStore(Integer key) throws SQLException {
+    public Store getStore() throws SQLException {
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Store WHERE id = ?");
-        stmt.setObject(1, key);
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Store WHERE id = 1");
 
         ResultSet resultSet = stmt.executeQuery();
         boolean hasOne = resultSet.next();

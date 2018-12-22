@@ -44,6 +44,7 @@ public class AccountService {
         Account account = accountDao.findName(userName);
         return account;
     }
+
     /**
      * Metodi lisää uuden käyttäjän Accounts tietokantatauluun
      *
@@ -90,6 +91,11 @@ public class AccountService {
         } else {
             return false;
         }
+    }
+
+    public void makeCurrentUserAdmin() throws SQLException {
+        currentUser.setAdmin(true);
+        accountDao.update(currentUser);
     }
 
     /**

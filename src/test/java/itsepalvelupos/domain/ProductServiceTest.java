@@ -1,13 +1,11 @@
 package itsepalvelupos.domain;
 
 
-import itsepalvelupos.database.AccountDao;
 import itsepalvelupos.database.Database;
 import itsepalvelupos.database.ProductDao;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import java.sql.SQLException;
 
@@ -16,15 +14,12 @@ import static org.junit.Assert.*;
 public class ProductServiceTest {
 
     private Database database;
-    private AccountService accountService;
     private ProductService productService;
-
     private ProductDao productDao;
 
-    private Account currentUser;
 
     @Before
-    public void setUp() throws SQLException {
+    public void setUp() {
         database = new Database("test.db");
         database.initDatabase();
 

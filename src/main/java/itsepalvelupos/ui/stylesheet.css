@@ -6,3 +6,8 @@
     -fx-pref-width: 200;
     -fx-text-fill: WHITE;
 }
+
+.custom-jfx-check-box{
+    -jfx-checked-color: RED;
+    -jfx-unchecked-color: BLACK;
+}
