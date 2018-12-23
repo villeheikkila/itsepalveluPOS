@@ -7,7 +7,7 @@ Lataa tiedosto [itsepalveluPOS-viikko6-dl.jar](https://github.com/villeheikkila/
 Ohjelma käynnistetään komennolla 
 
 ```
-java -jar itsepalveluPOS-viikko6-dl.jar
+java -jar itsepalveluPOS-release.jar
 ```
 
 ## Kirjautuminen

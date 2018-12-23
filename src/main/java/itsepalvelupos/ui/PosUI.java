@@ -151,7 +151,6 @@ public class PosUI extends Application {
         });
 
         storeWindow = new Scene(storeGrid, 800, 600);
-        storeWindow.getStylesheets().add("/src/stylesheet.css");
 
         // Sisäänkirjautuminen
 
@@ -234,7 +233,6 @@ public class PosUI extends Application {
         });
 
         loginWindow = new Scene(grid, 800, 600);
-        loginWindow.getStylesheets().add("/src/stylesheet.css");
 
         // Käyttäjän alustaminen
 

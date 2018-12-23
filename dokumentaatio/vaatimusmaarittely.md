@@ -2,11 +2,11 @@
 
 ## Sovelluksen tarkoitus
 
-Sovelluksen avulla käyttäjien on mahdollista ostaa tuotteita ennalta määritellystä listasta. Jokaisella käyttäjälä on oma tili, joka sisältää tiedot saldosta.
+Sovelluksen avulla käyttäjien on mahdollista ostaa tuotteita ennalta määritellystä listasta. Jokaisella käyttäjälä on oma tili, joka sisältää tiedot käyttäjän tallettamasta rahasta. Käyttäjä voi ostaa tällä rahalla tuotteita tuotelistasta.
 
 ## Käyttäjät
 
-Sovelluksessa on alussa vain _pääkäyttäjä_, jolla on oikeus lisätä uusia tuotteita ja poistaa muita käyttäjiä. Sovellukseen voi lisätä mielivaltaisen määrän _normaaleja käyttäjiä_. Normaaleille käyttäjille on mahdollista antaa pääkäyttäjän oikeudet.
+Käyttäjää luodessa voi valita tekeekö käyttäjästä _pääkäyttäjän_, jolla on oikeus lisätä uusia tuotteita ja poistaa muita käyttäjiä vai normaalin käyttäjän, joka voi vain lisätä rahaa omalle tilille ja ostaa tuotteita. Sovellukseen voi lisätä mielivaltaisen määrän _käyttäjiä_. Normaaleille käyttäjille on mahdollista antaa pääkäyttäjän oikeudet.
 
 ## Käyttöliittymäluonnos
 
@@ -28,9 +28,11 @@ Ikkunan yläkulmassa näkyy käyttäjätunnus ja saldo. Lopuksi alhaalta kirjaud
 
 ### Ennen kirjautumista
 
+- sovelluksen käynnistäjä voi luoda uuden tietokantataulun sekä antaa kaupalle nimen ja alkupääoman
+
 - käyttäjä voi luoda järjestelmään käyttäjätunnuksen
-  - käyttäjätunnuksen täytyy olla uniikki ja pituudeltaan vähintään 6 merkkiä
-  - salasanan täytyy olla vähiintää 6 merkkiä pitkä
+  - käyttäjätunnuksen täytyy olla uniikki ja pituudeltaan vähintään 3 merkkiä
+  - salasanan täytyy olla vähiintää 3 merkkiä pitkä
 
 - käyttäjä voi kirjautua järjestelmään
   - kirjautuminen onnistuu syötettäessä olemassaoleva käyttäjätunnus ja salasana kirjautumislomakkeelle
@@ -40,34 +42,37 @@ Ikkunan yläkulmassa näkyy käyttäjätunnus ja saldo. Lopuksi alhaalta kirjaud
 
 - käyttäjä näkee listan kaupan tuotteista
 
-- käyttäjä voi klikata tuotetta, jolloin ne lisätään ostettavien tuotteiden listalle
-
-- käyttäjä voi viimeistellä oston painalla Checkout näppäintä, jolloin tuotteiden hinta vähennetään käyttäjän saldosta
+- käyttäjä voi ostaa tuotteita
 
 - käyttäjä voi lisätä saldoa
 
-- käyttäjä voi kirjautua ulos järjestelmästä
+- käyttäjän vaihtaminen (Ei vielä implementoitu)
 
 ## Pääkäyttäjän oikeudet
 
-- voi lisätä tuotteita tuotteiden lisäyslomakkeella
+- voi lisätä tuotteita tuotteiden lisäyslomakkeella (Ei implementoitu käyttölittymässä)
 
-- voi poistaa muita käyttäjiä
+- voi poistaa muita käyttäjiä (Ei implementoitu käyttölittymässä)
 
-- voi muuttaa muiden käyttäjien salasanoj
+- voi muuttaa muiden käyttäjien salasanoja (Ei implementoitu käyttölittymässä)
 
-- voi hyväksyä saldo lisäykset
+- voi hyväksyä saldo lisäykset (Ei implementoitu)
+
+## Tietokanta
+
+- Pitää kirjaa tuotteiden määrästä
 
 ## Jatkokehitysideoita
 
-Perusversion jälkeen projektiin lisätään muita hyödyllisiä ominaisuuksia.
+##### Perusversion jälkeen projektiin lisätään muita hyödyllisiä ominaisuuksia.
 
 - ostoshistoria, joka pitää kirjaa ostetuista tuotteista
-
-- inventaario, johon voi määrittää kaupassa olevien tuotteiden määrät ja seurata muutoksia
 
 - laajemmat käyttäjätiedot, kuten sähköposti ja avatar
 
 - loppuneen tuotteen tilauspyyntö
 
 - erilliset sivut eri tuotekategorioille
+
+- ostoskori
+
