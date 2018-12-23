@@ -18,7 +18,6 @@ public class PosService {
     private ProductDao productDao;
     private StoreDao storeDao;
 
-    private ArrayList<Integer> shoppingCart;
     private boolean newDatabase;
 
     public PosService(String db) {
@@ -57,54 +56,6 @@ public class PosService {
         }
 
         return false;
-    }
-
-    /**
-     * Metodi ostaa kaikki tuotteet ostoskorissa ja tyhjentää lopuksi ostoskorin.
-     *
-     * @throws SQLException mikäli tapahtuu virhe.
-     *
-     */
-
-    public void buyCart() throws SQLException {
-        for (Integer id : shoppingCart) {
-            buy(id);
-        }
-        emptyCart();
-    }
-
-    /**
-     * Metodi lisää tuotteen ostoskoriin. Saman tuotteen voi lisätä vain kerran.
-     *
-     * @param   id   Tuotteen id (positiivinen kokonaisluku).
-     *
-     *
-     * @return palauttaa true, jos lisääminen on mahdollista.
-     *
-     * @throws SQLException mikäli tapahtuu virhe.
-     *
-     */
-
-    public boolean addToCart(int id) throws SQLException {
-        if (productDao.findOne(id).getInventory() > 0) {
-            for (Integer cart : shoppingCart) {
-                if (cart == id) {
-                    return false;
-                }
-            }
-            shoppingCart.add(id);
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * Metodi tyhjentää ostoskorin.
-     *
-     */
-
-    public void emptyCart() {
-        this.shoppingCart = null;
     }
 
     /**

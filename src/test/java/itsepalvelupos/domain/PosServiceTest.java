@@ -49,12 +49,4 @@ public class PosServiceTest {
         posService.getDatabase().removeDatabase();
     }
 
-    @Test
-    public void buy() throws SQLException {
-//        assertTrue(posService.buy(4));
-//        assertEquals(productDao.findOne(4).getInventory(),2);
-//        assertEquals(accountDao.findOne(1).getBalance(), 990);
-//        assertEquals(storeDao.getStore().getCash(), 1010);
-    }
-
 }
