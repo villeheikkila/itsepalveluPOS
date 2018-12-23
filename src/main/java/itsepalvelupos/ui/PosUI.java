@@ -62,7 +62,7 @@ public class PosUI extends Application {
         dataGrid.add(dataTextField, 1, 1);
 
         JFXButton dataButton = new JFXButton("Lisää");
-        dataButton.getStyleClass().add("button-raised");
+        dataButton.setStyle("-fx-padding: 0.7em 0.57em; -fx-font-size: 14px; -jfx-button-type: RAISED; -fx-background-color: rgb(77,102,204); -fx-pref-width: 200; -fx-text-fill: WHITE");
 
         HBox dataHotBoxButton = new HBox(10);
         dataHotBoxButton.setAlignment(Pos.BOTTOM_RIGHT);
@@ -92,7 +92,6 @@ public class PosUI extends Application {
         });
 
         dataWindow = new Scene(dataGrid, 800, 600);
-        dataWindow.getStylesheets().add("itsepalvelupos/ui/stylesheet.css");
 
         // Kaupan luominen
 
@@ -122,6 +121,7 @@ public class PosUI extends Application {
 
         JFXButton createStoreButton = new JFXButton("Lisää kauppa");
         createStoreButton.getStyleClass().add("button-raised");
+        createStoreButton.setStyle("-fx-padding: 0.7em 0.57em; -fx-font-size: 14px; -jfx-button-type: RAISED; -fx-background-color: rgb(77,102,204); -fx-pref-width: 200; -fx-text-fill: WHITE");
 
         HBox storeHotBoxButton = new HBox(10);
         storeHotBoxButton.setAlignment(Pos.BOTTOM_RIGHT);
@@ -179,7 +179,7 @@ public class PosUI extends Application {
         grid.add(passwordBox, 1, 2);
 
         JFXButton createButton = new JFXButton("Lisää käyttäjä");
-        createButton.getStyleClass().add("button-raised");
+        createButton.setStyle("-fx-padding: 0.7em 0.57em; -fx-font-size: 14px; -jfx-button-type: RAISED; -fx-background-color: rgb(77,102,204); -fx-pref-width: 200; -fx-text-fill: WHITE");
 
         HBox hotBoxButton = new HBox(10);
         hotBoxButton.setAlignment(Pos.BOTTOM_RIGHT);
@@ -187,7 +187,8 @@ public class PosUI extends Application {
         grid.add(hotBoxButton, 1, 4);
 
         JFXButton loginButton = new JFXButton("Kirjaudu sisään");
-        loginButton.getStyleClass().add("button-raised");
+        loginButton.setStyle("-fx-padding: 0.7em 0.57em; -fx-font-size: 14px; -jfx-button-type: RAISED; -fx-background-color: rgb(00,220,225); -fx-pref-width: 200; -fx-text-fill: WHITE");
+
 
         HBox loginHotBoxButton = new HBox(10);
         loginHotBoxButton.setAlignment(Pos.BOTTOM_RIGHT);
@@ -256,7 +257,7 @@ public class PosUI extends Application {
         userGrid.add(cashTextField, 1, 1);
 
         JFXButton cashButton = new JFXButton("Lisää");
-        cashButton.getStyleClass().add("button-raised");
+        cashButton.setStyle("-fx-padding: 0.7em 0.57em; -fx-font-size: 14px; -jfx-button-type: RAISED; -fx-background-color: rgb(77,102,204); -fx-pref-width: 200; -fx-text-fill: WHITE");
 
         HBox cashHotBoxButton = new HBox(10);
         cashHotBoxButton.setAlignment(Pos.BOTTOM_RIGHT);
@@ -264,7 +265,6 @@ public class PosUI extends Application {
         userGrid.add(cashHotBoxButton, 1, 4);
 
         JFXCheckBox checkBox = new JFXCheckBox("Tee käyttäjästä admin");
-        checkBox.getStyleClass().add("custom-jfx-check-box");
         userGrid.add(checkBox, 0, 3);
 
         final Text userActionTarget = new Text();
@@ -355,6 +355,8 @@ public class PosUI extends Application {
     private class CustomListCell extends ListCell<Product> {
 
         private HBox buy;
+        private HBox cart;
+
         private Text name;
         private Text price;
         private Text inventory;
@@ -371,11 +373,13 @@ public class PosUI extends Application {
             inventory.setFont(Font.font("Verdana", FontWeight.NORMAL, 22));
 
             VBox vBox = new VBox(name, price, inventory);
+
             JFXButton createBuyButton = new JFXButton("Osta");
-            createBuyButton.setFont(Font.font("Verdana", FontWeight.NORMAL, 22));
+            createBuyButton.setStyle("-fx-padding: 1.00em 1.00em; -fx-font-size: 22px; -jfx-button-type: RAISED; -fx-background-color: rgb(77,102,204); -fx-pref-width: 200; -fx-text-fill: WHITE");
 
             buy = new HBox(createBuyButton, vBox);
             buy.setSpacing(50);
+
 
             createBuyButton.setOnAction(e -> {
                 try {
