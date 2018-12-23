@@ -36,21 +36,21 @@ public class PosService {
     }
 
     /**
-     * Metodi ostaa tuotteen eli vähentää yhden tuotteen varastosta ja siirtää tuotteen hinnan käyttäjän tililtä kassaan
+     * Metodi ostaa tuotteen eli vähentää yhden tuotteen varastosta ja siirtää tuotteen hinnan käyttäjän tililtä kassaan.
      *
-     * @param   id   Tuotteen id (positiivinen kokonaisluku)
+     * @param   id   Tuotteen id (positiivinen kokonaisluku).
      *
-     * @return palauttaa true, jos ostaminen on mahdollista
+     * @return palauttaa true, jos ostaminen on mahdollista.
      *
-     * @throws SQLException mikäli tapahtuu virhe
+     * @throws SQLException mikäli tapahtuu virhe.
      *
      */
 
     public boolean buy(int id) throws SQLException {
         if ((productDao.findOne(id) != null) && (accountService.getCurrentUser().getBalance() >= productDao.findOne(id).getPrice())) {
             int price = productDao.findOne(id).getPrice();
-            productService.buyProduct(id);
             int negPrice = -price;
+            productService.buyProduct(id);
             accountService.changeBalance(negPrice);
             storeService.changeCash(price);
             return true;
@@ -60,9 +60,9 @@ public class PosService {
     }
 
     /**
-     * Metodi ostaa kaikki tuotteet ostoskorissa ja tyhjentää lopuksi ostoskorin
+     * Metodi ostaa kaikki tuotteet ostoskorissa ja tyhjentää lopuksi ostoskorin.
      *
-     * @throws SQLException mikäli tapahtuu virhe
+     * @throws SQLException mikäli tapahtuu virhe.
      *
      */
 
@@ -76,12 +76,12 @@ public class PosService {
     /**
      * Metodi lisää tuotteen ostoskoriin. Saman tuotteen voi lisätä vain kerran.
      *
-     * @param   id   Tuotteen id (positiivinen kokonaisluku)
+     * @param   id   Tuotteen id (positiivinen kokonaisluku).
      *
      *
-     * @return palauttaa true, jos lisääminen on mahdollista
+     * @return palauttaa true, jos lisääminen on mahdollista.
      *
-     * @throws SQLException mikäli tapahtuu virhe
+     * @throws SQLException mikäli tapahtuu virhe.
      *
      */
 
@@ -99,7 +99,7 @@ public class PosService {
     }
 
     /**
-     * Metodi tyhjentää ostoskorin
+     * Metodi tyhjentää ostoskorin.
      *
      */
 
@@ -108,9 +108,9 @@ public class PosService {
     }
 
     /**
-     * Metodi mahdollistaa productServicen käsittelyn
+     * Metodi mahdollistaa productService olion käsittelyn posServicen ulkopuolelta.
      *
-     * @return palauttaa productService olion
+     * @return palauttaa productService olion.
      */
 
     public ProductService getProductService() {
@@ -118,24 +118,54 @@ public class PosService {
     }
 
     /**
-     * Metodi mahdollistaa accountServicen käsittelyn
+     * Metodi mahdollistaa accountService olion käsittelyn posServicen ulkopuolelta.
      *
-     * @return palauttaa accountService olion
+     * @return palauttaa accountService olion.
      */
 
     public AccountService getAccountService() {
         return accountService;
     }
 
-    public Database getDatabase() { return database; }
+    /**
+     * Metodi mahdollistaa database olion käsittelyn posServicen ulkopuolelta.
+     *
+     * @return palauttaa database olion.
+     */
+
+    public Database getDatabase() {
+        return database;
+    }
+
+    /**
+     * Metodi kertoo onko tietokanta luotu tässä instanssissa.
+     *
+     * @return palauttaa true, jos tietokanta on luotu tässä instanssissa, muuten false.
+     */
 
     public boolean isNewDatabase() {
         return newDatabase;
     }
 
+    /**
+     * Metodi mahdollistaa store olion käsittelyn posServicen ulkopuolelta.
+     *
+     * @return palauttaa store olion.
+     */
+
+    public StoreService getStoreService() {
+        return storeService;
+    }
+
+    /**
+     * Metodi poistaa käytössä olevan tietokannan pysyvästi.
+     *
+     */
+
     public void deleteDatabase() {
         database.removeDatabase();
     }
 
-    public StoreService getStoreService() { return storeService; }
+
+
 }

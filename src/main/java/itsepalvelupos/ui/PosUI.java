@@ -5,22 +5,21 @@ import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import itsepalvelupos.domain.PosService;
+import itsepalvelupos.domain.Product;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.*;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-
-import java.net.URL;
+import javafx.collections.*;
+import javafx.util.Callback;
 import java.sql.SQLException;
 import java.util.Optional;
-
 
 public class PosUI extends Application {
 
@@ -30,14 +29,14 @@ public class PosUI extends Application {
     private Scene dataWindow;
     private Scene storeWindow;
     private Scene userWindow;
-
+    private StackPane StackPane;
 
     @Override
-    public void init() throws Exception {
+    public void init() {
     }
 
     @Override
-    public void stop() throws SQLException {
+    public void stop() {
     }
 
     @Override
@@ -94,8 +93,6 @@ public class PosUI extends Application {
 
         dataWindow = new Scene(dataGrid, 800, 600);
         dataWindow.getStylesheets().add("itsepalvelupos/ui/stylesheet.css");
-
-
 
         // Kaupan luominen
 
@@ -235,17 +232,10 @@ public class PosUI extends Application {
             }
         });
 
-
         loginWindow = new Scene(grid, 800, 600);
         loginWindow.getStylesheets().add("/src/stylesheet.css");
 
-        // Pääikkuna
-
-        ScrollPane todoScollbar = new ScrollPane();
-        BorderPane mainPane = new BorderPane(todoScollbar);
-        mainWindow = new Scene(mainPane, 300, 250);
-
-        // Käyttäjä
+        // Käyttäjän alustaminen
 
         GridPane userGrid = new GridPane();
         userGrid.setAlignment(Pos.CENTER);
@@ -289,11 +279,13 @@ public class PosUI extends Application {
                         if (checkBox.isSelected()) {
                             posService.getAccountService().makeCurrentUserAdmin();
                             userActionTarget.setText("Olet nyt admin");
-                            System.out.println("Olet admin");
                             System.out.println(posService.getAccountService().getCurrentUser().isAdmin());
+                            primaryStage.setScene(storeWindow);
                         }
+                        updateProducts();
                         primaryStage.setScene(mainWindow);
-                } catch(Exception ex) {
+
+                    } catch(Exception ex) {
                         userActionTarget.setText("Summan täytyy olla kokonaisluku");
                     }
             } else {
@@ -303,7 +295,14 @@ public class PosUI extends Application {
 
         userWindow = new Scene(userGrid, 600, 200);
 
+        // Tuoteikkuna
 
+        StackPane = new StackPane();
+        JFXButton addUser = new JFXButton("Osta");
+        addUser.setFont(Font.font("Verdana", FontWeight.NORMAL, 22));
+        StackPane.getChildren().add(addUser);
+
+        mainWindow = new Scene(StackPane, 800, 600);
 
         // Luodaan primary stage
 
@@ -311,9 +310,28 @@ public class PosUI extends Application {
         primaryStage.setScene(dataWindow);
         primaryStage.show();
         primaryStage.setOnCloseRequest(e-> {
-            deleteDatabaseDialog();
+            if (posService != null) {
+                deleteDatabaseDialog();
+            }
             System.out.println("Program will be closed");
         });
+    }
+
+    private void updateProducts() throws SQLException {
+        ObservableList<Product> products = FXCollections.observableArrayList();
+        products.removeAll();
+        ListView<Product> listView = new ListView<>(products);
+        for (Product product : posService.getProductService().listProducts()) {
+            products.add(product);
+        }
+        listView.setCellFactory(new Callback<ListView<Product>, ListCell<Product>>() {
+            @Override
+            public ListCell<Product> call(ListView<Product> listView) {
+                return new CustomListCell();
+            }
+        });
+
+        StackPane.getChildren().add(listView);
     }
 
     private void deleteDatabaseDialog() {
@@ -328,15 +346,60 @@ public class PosUI extends Application {
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == deleteDatabase){
-            if (posService != null) {
-                posService.deleteDatabase();
-            }
+            posService.deleteDatabase();
         } else if (result.get() == retainDatabase) {
             System.out.println("Tietokantaa ei poisteta");
         }
     }
 
-    public static void main(String[] args) throws Exception {
+    private class CustomListCell extends ListCell<Product> {
+
+        private HBox buy;
+        private Text name;
+        private Text price;
+        private Text inventory;
+        private Integer id;
+
+        public CustomListCell() {
+            super();
+            name = new Text();
+            price = new Text();
+            inventory = new Text();
+
+            name.setFont(Font.font("Verdana", FontWeight.NORMAL, 22));
+            price.setFont(Font.font("Verdana", FontWeight.NORMAL, 22));
+            inventory.setFont(Font.font("Verdana", FontWeight.NORMAL, 22));
+
+            VBox vBox = new VBox(name, price, inventory);
+            JFXButton createBuyButton = new JFXButton("Osta");
+            createBuyButton.setFont(Font.font("Verdana", FontWeight.NORMAL, 22));
+
+            buy = new HBox(createBuyButton, vBox);
+            buy.setSpacing(50);
+
+            createBuyButton.setOnAction(e -> {
+                try {
+                    posService.buy(id);
+                    updateProducts();
+                } catch(Exception ex) {
+                    System.out.println("SQL Exception");
+                }
+            });
+        }
+
+        @Override
+        protected void updateItem(Product item, boolean empty) {
+            super.updateItem(item, empty);
+            if (item != null && !empty) {
+                name.setText(item.getName());
+                price.setText(item.getPrice() + "€");
+                inventory.setText(Integer.toString(item.getInventory()));
+                id = item.getId();
+                setGraphic(buy);
+            }
+        }
+    }
+    public static void main(String[] args) {
         launch(PosUI.class);
     }
 }

@@ -3,8 +3,6 @@ package itsepalvelupos.domain;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.sql.SQLException;
-
 import static org.junit.Assert.*;
 
 public class StoreTest {

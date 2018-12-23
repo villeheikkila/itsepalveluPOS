@@ -18,13 +18,13 @@ public class AccountDao implements Dao<Account, Integer> {
     }
 
     /**
-     * Metodi hakee käyttäjän tiedot tietokantataulusta
+     * Metodi hakee käyttäjän tiedot tietokantataulusta.
      *
-     * @param   key   Käyttäjän id tietokantataulussa
+     * @param   key   Käyttäjän id tietokantataulussa.
      *
-     * @return palauttaa Account olion
+     * @return palauttaa Account olion.
      *
-     * @throws SQLException mikäli tapahtuu virhe
+     * @throws SQLException mikäli tapahtuu virhe.
      *
      */
 
@@ -53,11 +53,11 @@ public class AccountDao implements Dao<Account, Integer> {
     }
 
     /**
-     * Metodi hakee kaikki käyttäjät tietokantataulusta
+     * Metodi hakee kaikki käyttäjät tietokantataulusta.
      *
      * @return palauttaa listan Account olioita.
      *
-     * @throws SQLException mikäli tapahtuu virhe
+     * @throws SQLException mikäli tapahtuu virhe.
      *
      */
 
@@ -85,11 +85,11 @@ public class AccountDao implements Dao<Account, Integer> {
     }
 
     /**
-     * Metodi poistaa käyttäjän tietokantataulusta
+     * Metodi poistaa käyttäjän tietokantataulusta.
      *
-     * @param   key   Käyttäjän id tietokantataulussa
+     * @param   key   Käyttäjän id tietokantataulussa.
      *
-     * @throws SQLException mikäli tapahtuu virhe     *
+     * @throws SQLException mikäli tapahtuu virhe.
      */
 
     @Override
@@ -104,13 +104,13 @@ public class AccountDao implements Dao<Account, Integer> {
     }
 
     /**
-     * Metodi hakee käyttäjän tiedot tietokantataulusta
+     * Metodi hakee käyttäjän tiedot tietokantataulusta.
      *
-     * @param   userName   Käyttäjän nimi tietokantataulussa
+     * @param   userName   Käyttäjän nimi tietokantataulussa.
      *
-     * @return palauttaa Account olion, jos käyttäjä löytyy tai null, mikäli käyttäjää ei löydy
+     * @return palauttaa Account olion, jos käyttäjä löytyy tai null, mikäli käyttäjää ei löydy.
      *
-     * @throws SQLException mikäli tapahtuu virhe
+     * @throws SQLException mikäli tapahtuu virhe.
      *
      */
 
@@ -139,11 +139,11 @@ public class AccountDao implements Dao<Account, Integer> {
     }
 
     /**
-     * Metodi lisää käyttäjän tiedot tietokantaan
+     * Metodi lisää käyttäjän tiedot tietokantaan.
      *
-     * @param  account  Lisättävä Account olio
+     * @param  account  Lisättävä Account olio.
      *
-     * @throws SQLException mikäli tapahtuu virhe
+     * @throws SQLException mikäli tapahtuu virhe.
      *
      */
 
@@ -161,11 +161,11 @@ public class AccountDao implements Dao<Account, Integer> {
     }
 
     /**
-     * Metodi päivittää käyttäjän tiedot tietokantataulusta
+     * Metodi päivittää käyttäjän tiedot tietokantataulusta.
      *
-     * @param  account Account olio, jonka tiedoilla korvataan vanhat tiedot
+     * @param  account Account olio, jonka tiedoilla korvataan vanhat tiedot.
      *
-     * @throws SQLException mikäli tapahtuu virhe
+     * @throws SQLException mikäli tapahtuu virhe.
      *
      */
 

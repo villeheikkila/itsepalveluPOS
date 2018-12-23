@@ -15,11 +15,11 @@ public class StoreDao {
     }
 
     /**
-     * Metodi hakee kaupan tiedot tietokantataulusta
+     * Metodi hakee kaupan tiedot tietokantataulusta.
      *
      * @return palauttaa Store olion.
      *
-     * @throws SQLException mikäli tapahtuu virhe
+     * @throws SQLException mikäli tapahtuu virhe.
      *
      */
 
@@ -46,11 +46,11 @@ public class StoreDao {
     }
 
     /**
-     * Metodi lisää kaupan tietokantatauluun
+     * Metodi lisää kaupan tietokantatauluun.
      *
-     * @param  store  Lisättävä Store olio
+     * @param  store  Lisättävä Store olio.
      *
-     * @throws SQLException mikäli tapahtuu virhe
+     * @throws SQLException mikäli tapahtuu virhe.
      *
      */
 
@@ -66,11 +66,11 @@ public class StoreDao {
     }
 
     /**
-     * Metodi päivittää kaupan tiedot tietokantataulusta
+     * Metodi päivittää kaupan tiedot tietokantataulusta.
      *
-     * @param  store Store olio, jonka tiedoilla korvataan vanhat tiedot
+     * @param  store Store olio, jonka tiedoilla korvataan vanhat tiedot.
      *
-     * @throws SQLException mikäli tapahtuu virhe
+     * @throws SQLException mikäli tapahtuu virhe.
      *
      */
 

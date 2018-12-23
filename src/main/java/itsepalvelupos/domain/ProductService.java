@@ -15,14 +15,14 @@ public class ProductService {
     /**
      * Metodi lisää tuotteen annetuilla arvoilla Products tietokantatauluun.
      *
-     * @param   name   Tuotteen nimi (pituus vähintään 3 kirjainta)
-     * @param   price  Tuotteen hinta (positiivinen kokonaisluku)
-     * @param   inventory   Tuotteiden lukumäärä (positiivinen kokonaisluku)
+     * @param   name   Tuotteen nimi (pituus vähintään 3 kirjainta).
+     * @param   price  Tuotteen hinta (positiivinen kokonaisluku).
+     * @param   inventory   Tuotteiden lukumäärä (positiivinen kokonaisluku).
      *
      *
-     * @return palauttaa true, jos tuotteelle annetut tiedot ovat kelvollisia
+     * @return palauttaa true, jos tuotteelle annetut tiedot ovat kelvollisia.
      *
-     * @throws SQLException mikäli tapahtuu virhe
+     * @throws SQLException mikäli tapahtuu virhe.
      *
      */
 
@@ -37,11 +37,11 @@ public class ProductService {
     }
 
     /**
-     * Metodi listaa kaikki tuotteet Products tietokantataulussa
+     * Metodi listaa kaikki tuotteet Products tietokantataulussa.
      *
-     * @return palauttaa listan Product olioita
+     * @return palauttaa listan Product olioita.
      *
-     * @throws SQLException mikäli tapahtuu virhe
+     * @throws SQLException mikäli tapahtuu virhe.
      *
      */
 
@@ -53,15 +53,16 @@ public class ProductService {
     /**
      * Metodi vähentää annetun tuotteen määrää vastastossa yhdellä.
      *
-     * @param   id   Tuotteen id (positiivinen kokonaisluku)
+     * @param   id   Tuotteen id (positiivinen kokonaisluku).
      *
-     * @return palauttaa tuotteen hinnan, jos sellainen on olemassa tai muuten 0
+     * @return palauttaa tuotteen hinnan, jos sellainen on olemassa tai muuten 0.
      *
-     * @throws SQLException mikäli tapahtuu virhe
+     * @throws SQLException mikäli tapahtuu virhe.
+     *
      */
 
     public int buyProduct(int id) throws SQLException {
-        if (productDao.findOne(id) != null) {
+        if ((productDao.findOne(id) != null) && (productDao.findOne(id).getInventory() > 0)) {
             Product product = productDao.findOne(id);
             product.reduceInventory();
             productDao.update(product);

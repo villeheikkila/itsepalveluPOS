@@ -14,9 +14,9 @@ public class Database {
 
 
     /**
-     * Konstruktori määrittää käytettävän tietokannan nimen
+     * Konstruktori määrittää käytettävän tietokannan nimen.
      *
-     * @param   databaseName   Tietokannan nimi
+     * @param   databaseName   Tietokannan nimi.
      *
      */
 
@@ -26,11 +26,11 @@ public class Database {
 
 
     /**
-     * Metodi mahdollistaa yhdistämisen tietokantaan
+     * Metodi mahdollistaa yhdistämisen tietokantaan.
      *
      * @return palauttaa yhteyden käytössä olevaan tietokantaan.
      *
-     * @throws SQLException mikäli tapahtuu virhe
+     * @throws SQLException mikäli tapahtuu virhe.
      *
      */
 
@@ -40,7 +40,9 @@ public class Database {
     }
 
     /**
-     * Metodi luo uuden tietokannan, jos sellaista ei vielä ole
+     * Metodi luo uuden tietokannan, jos sellaista ei vielä ole.
+     *
+     * @return palauttaa true, jos luotiin uusi tietokanta. false, jos käytetään jo olemassa olevaa tietokantaa.
      *
      */
 
@@ -66,11 +68,12 @@ public class Database {
             } catch (Throwable t) {
                 System.out.println("Error: " + t.getMessage());
             }
-        } return true;
+        }
+        return true;
     }
 
     /**
-     * Metodi poistaa nykyisen tietokannan
+     * Metodi poistaa nykyisen tietokannan.
      *
      */
 
@@ -95,6 +98,9 @@ public class Database {
         db.add("CREATE TABLE Products (id integer PRIMARY KEY, name varchar(100), inventory INT, price INT);");
         db.add("CREATE TABLE Accounts (id integer PRIMARY KEY, username varchar(100), password varchar(20), admin boolean, balance integer);");
         db.add("CREATE TABLE Store (id integer PRIMARY KEY, name varchar(100), cash integer);");
+        db.add("INSERT INTO Products (name, inventory, price) VALUES ('cheese', 10, 100);");
+        db.add("INSERT INTO Products (name, inventory, price) VALUES ('horse', 10, 100);");
+        db.add("INSERT INTO Products (name, inventory, price) VALUES ('sausage', 50, 200);");
 
         return db;
     }

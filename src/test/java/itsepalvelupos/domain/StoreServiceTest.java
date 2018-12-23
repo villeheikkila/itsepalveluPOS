@@ -1,6 +1,5 @@
 package itsepalvelupos.domain;
 
-import itsepalvelupos.database.AccountDao;
 import itsepalvelupos.database.Database;
 import itsepalvelupos.database.StoreDao;
 import org.junit.After;

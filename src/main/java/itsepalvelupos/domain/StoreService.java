@@ -14,14 +14,14 @@ public class StoreService {
     }
 
     /**
-     * Metodi lisää kaupan Store tietokantatauluun
+     * Metodi lisää kaupan Store tietokantatauluun.
      *
-     * @param   name   Kaupan nimi (pituus vähintään 3 merkkiä)
-     * @param   cash  Kaupan kassan saldo (pituus vähintään 3 merkkiä)
+     * @param   name   Kaupan nimi (pituus vähintään 3 merkkiä).
+     * @param   cash  Kaupan kassan saldo (pituus vähintään 3 merkkiä).
      *
-     * @return palauttaa true, jos kaupalle annetut tiedot ovat kelvollisia tai false, jos syöte ei ole kelvollinen tai tietokannassa on jo kauppa
+     * @return palauttaa true, jos kaupalle annetut tiedot ovat kelvollisia tai false, jos syöte ei ole kelvollinen tai tietokannassa on jo kauppa.
      *
-     * @throws SQLException mikäli tapahtuu virhe
+     * @throws SQLException mikäli tapahtuu virhe.
      *
      */
 
@@ -36,11 +36,13 @@ public class StoreService {
     }
 
     /**
-     * Metodi lisää annettavan summan kaupan kassaa, arvo voi olla myös negatiivinen
+     * Metodi lisää annettavan summan kaupan kassaa, arvo voi olla myös negatiivinen.
      *
-     * @param  ammount   Lisättävä summa (kokonaisluku)
+     * @param  ammount   Lisättävä summa (kokonaisluku).
      *
-     * @throws SQLException mikäli tapahtuu virhe
+     * @throws SQLException mikäli tapahtuu virhe.
+     *
+     * @return palauttaa true, jos rahan lisääminen tai vähentäminen onnistuu, muuten false.
      *
      */
 
@@ -50,6 +52,8 @@ public class StoreService {
             store.setCash(store.getCash() + ammount);
             storeDao.update(store);
             return true;
-        } else { return false; }
+        } else {
+            return false;
+        }
     }
 }

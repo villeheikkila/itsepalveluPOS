@@ -18,13 +18,13 @@ public class ProductDao implements Dao<Product, Integer> {
     }
 
     /**
-     * Metodi hakee tuotteen tiedot tietokantataulusta
+     * Metodi hakee tuotteen tiedot tietokantataulusta.
      *
-     * @param   key   Tuotteen id tietokantataulussa
+     * @param   key   Tuotteen id tietokantataulussa.
      *
      * @return palauttaa Tuote olion.
      *
-     * @throws SQLException mikäli tapahtuu virhe
+     * @throws SQLException mikäli tapahtuu virhe.
      *
      */
 
@@ -54,11 +54,11 @@ public class ProductDao implements Dao<Product, Integer> {
     }
 
     /**
-     * Metodi hakee kaikki tuotteet tietokantataulusta
+     * Metodi hakee kaikki tuotteet tietokantataulusta.
      *
      * @return palauttaa listan Product olioita.
      *
-     * @throws SQLException mikäli tapahtuu virhe
+     * @throws SQLException mikäli tapahtuu virhe.
      *
      */
 
@@ -86,11 +86,11 @@ public class ProductDao implements Dao<Product, Integer> {
     }
 
     /**
-     * Metodi poistaa tuotteen tietokantataulusta
+     * Metodi poistaa tuotteen tietokantataulusta.
      *
-     * @param   key   Tuotteen id tietokantataulussa
+     * @param   key   Tuotteen id tietokantataulussa.
      *
-     * @throws SQLException mikäli tapahtuu virhe
+     * @throws SQLException mikäli tapahtuu virhe.
      *
      */
 
@@ -106,11 +106,11 @@ public class ProductDao implements Dao<Product, Integer> {
     }
 
     /**
-     * Metodi hakee kaupan tiedot tietokantataulusta
+     * Metodi hakee kaupan tiedot tietokantataulusta.
      *
-     * @param  product  Lisättävä Product olio
+     * @param  product  Lisättävä Product olio.
      *
-     * @throws SQLException mikäli tapahtuu virhe
+     * @throws SQLException mikäli tapahtuu virhe.
      *
      */
 

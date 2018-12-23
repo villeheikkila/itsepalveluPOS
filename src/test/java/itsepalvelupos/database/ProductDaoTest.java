@@ -33,7 +33,7 @@ public class ProductDaoTest {
 
     @Test
     public void findOne() throws SQLException {
-        Product found = productDao.findOne(1);
+        Product found = productDao.findOne(4);
         assertEquals(found.getName(), "product");
         assertEquals(found.getInventory(), 1);
         assertEquals(found.getPrice(), 10);
@@ -43,12 +43,12 @@ public class ProductDaoTest {
     public void findAll() throws SQLException {
         productDao.add(new Product("renamedProduct", 10, 5));
         List<Product> products = productDao.findAll();
-        assertEquals(products.get(0).getName(), "product");
-        assertEquals(products.get(0).getInventory(), 1);
-        assertEquals(products.get(0).getPrice(), 10);
-        assertEquals(products.get(1).getName(), "renamedProduct");
-        assertEquals(products.get(1).getInventory(), 10);
-        assertEquals(products.get(1).getPrice(), 5);
+        assertEquals(products.get(3).getName(), "product");
+        assertEquals(products.get(3).getInventory(), 1);
+        assertEquals(products.get(3).getPrice(), 10);
+        assertEquals(products.get(4).getName(), "renamedProduct");
+        assertEquals(products.get(4).getInventory(), 10);
+        assertEquals(products.get(4).getPrice(), 5);
     }
 
     @Test
@@ -60,7 +60,7 @@ public class ProductDaoTest {
     @Test
     public void add() throws SQLException {
         productDao.add(new Product("newProduct", 2, 50));
-        Product found = productDao.findOne(2);
+        Product found = productDao.findOne(5);
         assertEquals(found.getName(), "newProduct");
         assertEquals(found.getInventory(), 2);
         assertEquals(found.getPrice(), 50);

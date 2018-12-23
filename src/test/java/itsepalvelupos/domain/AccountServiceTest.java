@@ -14,7 +14,6 @@ public class AccountServiceTest {
     private Database database;
     private AccountService accountService;
     private AccountDao accountDao;
-    private Account currentUser;
 
 
     @Before
