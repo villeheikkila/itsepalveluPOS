@@ -8,6 +8,8 @@ itsepalveluPOS on alusta esimerkiksi kerhotiloissa tapahtuvaa myyntiä varten. S
 
 [Arkkitehtuurikuvaus](dokumentaatio/arkkitehtuuri.md)
 
+[Testausdokumentti](dokumentaatio/testidokumentti.md)
+
 [Työaikakirjanpito](dokumentaatio/tuntikirjanpito.md)
 
 [Käyttöohje](dokumentaatio/kayttoohje.md)
@@ -18,6 +20,8 @@ itsepalveluPOS on alusta esimerkiksi kerhotiloissa tapahtuvaa myyntiä varten. S
 [Viikko 5](https://github.com/villeheikkila/itsepalveluPOS/releases/tag/viikko5)
 
 [Viikko 6](https://github.com/villeheikkila/itsepalveluPOS/releases/tag/1.0)
+
+[Loppupalautus](https://github.com/villeheikkila/itsepalveluPOS/releases/tag/1.1)
 
 ## Komentorivitoiminnot
 
