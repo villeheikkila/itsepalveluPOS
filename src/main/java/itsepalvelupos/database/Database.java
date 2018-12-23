@@ -98,9 +98,9 @@ public class Database {
         db.add("CREATE TABLE Products (id integer PRIMARY KEY, name varchar(100), inventory INT, price INT);");
         db.add("CREATE TABLE Accounts (id integer PRIMARY KEY, username varchar(100), password varchar(20), admin boolean, balance integer);");
         db.add("CREATE TABLE Store (id integer PRIMARY KEY, name varchar(100), cash integer);");
-        db.add("INSERT INTO Products (name, inventory, price) VALUES ('cheese', 10, 100);");
-        db.add("INSERT INTO Products (name, inventory, price) VALUES ('horse', 10, 100);");
-        db.add("INSERT INTO Products (name, inventory, price) VALUES ('sausage', 50, 200);");
+        db.add("INSERT INTO Products (name, inventory, price) VALUES ('Makkara', 10, 100);");
+        db.add("INSERT INTO Products (name, inventory, price) VALUES ('Jallu', 10, 100);");
+        db.add("INSERT INTO Products (name, inventory, price) VALUES ('Sika', 50, 200);");
 
         return db;
     }
