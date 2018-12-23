@@ -1,6 +1,6 @@
 # itsepalveluPOS
 
-itsepalveluPOS on alusta esimerkiksi kerhotiloissa tapahtuvaa myyntiä varten. Sovellus tulee tarjoamaan graafisen ja kosketusnäyttö ystävällisen käyttöliittymän ostosten tekoon. Tämän lisäksi se tarjoaa työkalut varaston ja myynnin seurantaan.
+itsepalveluPOS on alusta esimerkiksi kerhotiloissa tapahtuvaa myyntiä varten. Se tarjoaa graafisen käyttöliittymän ostosten tekoa varten ja pitää kirjaa käyttäjien saldosta sekä kaupan kassasta.
 
 ## Dokumentaatio
 
