@@ -35,7 +35,7 @@ Tieto tallennetaan kolmeen eri SQL tauluun: Accounts, Products ja Store. Kaikki 
 Store-tietokantataulu sisältää vain yhden kohteen, joka määrittää kaupan nimen ja kassan saldon.
 
 Tietokantakaavio:
-<img src="kuvat/tietokantakaavio.png" width="500">
+<img src="kuvat/tietokantakaavio.png" width="200">
 
 ## Heikkoudet
 
